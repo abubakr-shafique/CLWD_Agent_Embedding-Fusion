@@ -85,7 +85,7 @@ I aim to use one slide per patient based on a deterministic rule, such as select
 
 The data are divided into three folds of training (70%), validation (10%), and test (20%) sets based on the 209 unique patients using [`CLWD_Data_Stratification.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/CLWD_Data_Stratification.ipynb) notebook. Three folds have been used to perform a cross validation over three different splits of the data. <br>
 
-[`CLWD_OneSlide-train.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-train.csv); [`CLWD_OneSlide-val.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-val.csv); [`CLWD_OneSlide-test.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-test.csv); CSV files are generated with patient level stratification.
+[`Fold 1`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/src/csv/Fold_0); [`Fold 1`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/src/csv/Fold_1); [`Fold 2`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/src/csv/Fold_2); CSV files are generated with patient level stratification.
 
 | Split      | (%)      | Patients (of 209)| Fold 0 <br> WSIs (of 215)    | Fold 1 <br> WSIs (of 215)    | Fold 2 <br> WSIs (of 215)    |
 | ---------- | -------: | ----------------:| ----------------------------:| ----------------------------:|----------------------------: |
