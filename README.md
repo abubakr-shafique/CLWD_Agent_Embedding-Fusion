@@ -11,7 +11,7 @@ Predict the **histologic growth pattern (tumor subtype)** of lung adenocarcinoma
 - [Project Organization](#Project-Organization)
 - [Environment Setup](#Python-Environment-Setup)
 - [Data Preparation](#Data-Preparation)
-- [Task](#Task)
+- [Tasks](#Tasks)
 - [Results](#Results)
 - [Discussion](#Discussion)
 - [Future Work](#Future-Work)
