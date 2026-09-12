@@ -545,12 +545,12 @@ Detailed evaluation results for each cross-validation fold are provided in the [
 
 **Best Model:**
 Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
-| Column 1 | Column 2 |
+| Overall Report | Confusion Matrix |
 | :---: | :---: |
-| ![Overall Results](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg) | ![Confusion Matrix](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_CM.jpg) |
+| <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg" width="100%"> | <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_CM.jpg" width="100%"> |
 
 
-[ROC](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_ROC.jpg)
+![ROC](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_ROC.jpg)
 
 ## Discussion
 Accurate classification of lung adenocarcinoma into its seven histological subtypes remains a challenging task due to the substantial morphological heterogeneity and overlap between tumour patterns. Distinguishing these subtypes often requires recognition of subtle architectural and cytological features, while individual WSIs may contain extensive regions of non-tumour tissue and substantial intra-tumour heterogeneity. Furthermore, the relative abundance of different histological patterns can vary considerably across slides, potentially resulting in an imbalance between diagnostically informative and non-informative regions. These factors make robust slide-level classification particularly challenging and motivate the use of methods capable of selectively identifying and integrating discriminative morphological features across large numbers of tissue patches. <br>
