@@ -6,6 +6,17 @@ Predict the **histologic growth pattern (tumor subtype)** of lung adenocarcinoma
 
 ---
 
+## Contents
+
+- [Project Organization](#Project Organization)
+- [HistoRotate: Rotation-Agnostic Training](#historotate-rotation-agnostic-training)
+- [PathDino: Histopathology Vision Transformer](#pathdino-histopathology-vision-transformer)
+- [Dataset Preparation](#dataset-preparation)
+- [PathDino Training](#pathdino-training)
+- [PathDino Inference on Histopathology Image](#pathdino-inference-on-histopathology-image)
+- [Results](#results)
+- [Future Work](#Future Work (with 10× the compute))
+
 ## Project Organization
 
 ```
