@@ -144,6 +144,15 @@ python run_all_embedding_models.py
 
 While using FMs, we have to make sure that each FMs are used as recommended by authors in their corresponding repositories and use their recommended normalization mean and standard deviation on which they have been pretrained. while `UNI2-h`, and `Virchow2` use `[mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]]` normalization mean and standard deviation, while `H-OPTIMUS-1` uses `[mean: [0.707223, 0.578729, 0.703617], std: [0.211883, 0.230117, 0.177517]]` mean and standard deviation. Model are being loaded from [`scripts/FMs/load_models.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/FMs/load_models.py) script along with their given data transform. <br> *Note: it requires huggingface access token and approval from the authors of the given FMs repository.* <br>
 
+Embeddings can be downloaded: <br>
+[`UNI2-h Embeddings`](https://drive.google.com/file/d/1gANwXbwh3Scc92ShhwbdTN8KCekJGSum/view?usp=sharing)<br>
+[`Virchow2 Embeddings`](https://drive.google.com/file/d/1t4NGjA-ymhfRE4He41gUec-1fRSnY8PB/view?usp=sharing)<br>
+[`UNI2-h Embeddings`](https://drive.google.com/file/d/1RVrYM2u8_059fFN0BoNe_uMo6u5ra23p/view?usp=sharing)<br>
+
+[`Patch Coordinates`](https://drive.google.com/file/d/16wBC57Ku4Bd19CoxvZAaIKBcyof5iMwy/view?usp=sharing) <br>
+[`Thumbnails & Masks`](https://drive.google.com/file/d/13QsK-V43hVHLLVwwtbld4XtfRomHcMKR/view?usp=sharing) <br>
+[`Patch Visualization`](https://drive.google.com/file/d/12hipS_iqNAppvzOH_G1LEDz3QA-uuL-Q/view?usp=sharing) <br>
+
 **Slide Encoding and Classification:** <br>
 Following patch-level feature extraction, the resulting patch embeddings from each WSI are aggregated into a single slide-level representation for downstream classification of the tumour into one of seven histopathological classes. In this study, we employ an Attention-Based Multiple Instance Learning (ABMIL) framework, where each WSI is treated as a bag of patch-level instances, with the corresponding slide-level tumour subtype serving as the bag-level label. The attention mechanism enables the model to learn the relative importance of individual patches and to construct a slide-level representation that emphasizes diagnostically informative regions. <br>
 
@@ -544,7 +553,7 @@ The results across three folds are summarized using [`notebooks/summarize_result
 Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 
 **Best Model:**
-Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
+Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
 | Overall Report | Confusion Matrix |
 | :---: | :---: |
 | <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg" width="100%"> | <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_CM.jpg" width="50%"> |
