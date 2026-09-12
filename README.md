@@ -9,13 +9,13 @@ Predict the **histologic growth pattern (tumor subtype)** of lung adenocarcinoma
 ## Contents
 
 - [Project Organization](#Project-Organization)
-- [HistoRotate: Rotation-Agnostic Training](#historotate-rotation-agnostic-training)
-- [PathDino: Histopathology Vision Transformer](#pathdino-histopathology-vision-transformer)
-- [Dataset Preparation](#dataset-preparation)
-- [PathDino Training](#pathdino-training)
-- [PathDino Inference on Histopathology Image](#pathdino-inference-on-histopathology-image)
-- [Results](#results)
-- [Future Work](#Future-Work-(with-10×-the-compute))
+- [Environment Setup](#Python-Environment-Setup)
+- [Data Preparation](#Data-Preparation)
+- [Task 1](#Task-1)
+- [Task 2](#Task-2)
+- [Results](#Results)
+- [Discussion](#Discussion)
+- [Future Work](#Future-Work)
 
 ## Project Organization
 
@@ -236,7 +236,7 @@ or all the folds can run altogether using [`run_all_bestMIL_with_Metadata.py`](h
 python run_all_bestMIL_with_Metadata.py
 ```
 
-## Task 2 — Agent System for Foundation-Model Fusion Search
+### Task 2 — Agent System for Foundation-Model Fusion Search
 
 **Objective:** <br>
 This task builds an agent that automatically searches for an effective way to combine three pathology foundation-model embeddings with patient metadata:
