@@ -491,7 +491,7 @@ results = {
 
 ### Experimental Strategy
 
-Training configurations are stored in `scripts/config`
+Training configurations are stored in [`scripts/config`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/scripts/config)
 
 **Embedding Generation:** <br>
 For patch-level feature extraction, the recommended inference settings provided by the respective foundation model authors were used to generate patch embeddings from the WSIs. This ensured that each FM was evaluated using its intended preprocessing and feature-extraction configuration. <br>
@@ -499,7 +499,7 @@ For patch-level feature extraction, the recommended inference settings provided 
 **ABMIL Training:** <br>
 For training the ABMIL aggregation models, the training set was used for model optimization, while the validation set was used to monitor model performance and select the best-performing checkpoint. To account for class imbalance, a weighted cross-entropy loss was employed, with class weights determined from the training data. <br>
 
-The models were optimized using the AdamW optimizer with an initial learning rate of ($1\times10^{-4}$) and a weight decay of ($1\times10^{-4}$). A step-based learning-rate scheduler was applied with a decay factor (($\gamma$)) of 0.1 and a step size of 3 epochs. A minimum learning-rate threshold of ($1\times10^{-6}$) was imposed to prevent the learning rate from decreasing below this value during training. <br>
+The models were optimized using the AdamW optimizer with an initial learning rate of ($1\times10^{-4}$) and a weight decay of ($1\times10^{-4}$). A step-based learning-rate scheduler was applied with a decay factor ($\gamma$) of 0.1 and a step size of 3 epochs. A minimum learning-rate threshold of ($1\times10^{-6}$) was imposed to prevent the learning rate from decreasing below this value during training. <br>
 
 Each ABMIL model was trained for a maximum of 10 epochs (each FM and each epoch) with a batch size of one. The best-performing model checkpoint was selected based on validation performance, using either the lowest validation loss or the highest validation balanced accuracy as the model-selection criterion. Balanced accuracy was used to account for potential class imbalance and to provide a more representative measure of performance across the seven tumour subtypes. <br>
 
@@ -543,6 +543,31 @@ The results across three folds are summarized using [`notebooks/summarize_result
 
 Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 
+**Best Model:**
+H-OPTIMUS-1 with ABMIL slide level aggregation has shown the best performance across all the tasks performed.
+| Column 1 | Column 2 |
+| :---: | :---: |
+| ![Image 1](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg) | ![Image 2](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_ROC.jpg) |
+| ![Image 3](image3.png) | ![Image 4](image4.png) |
+
 ## Discussion
 Accurate classification of lung adenocarcinoma into its seven histological subtypes remains a challenging task due to the substantial morphological heterogeneity and overlap between tumour patterns. Distinguishing these subtypes often requires recognition of subtle architectural and cytological features, while individual WSIs may contain extensive regions of non-tumour tissue and substantial intra-tumour heterogeneity. Furthermore, the relative abundance of different histological patterns can vary considerably across slides, potentially resulting in an imbalance between diagnostically informative and non-informative regions. These factors make robust slide-level classification particularly challenging and motivate the use of methods capable of selectively identifying and integrating discriminative morphological features across large numbers of tissue patches. <br>
+
+When classification was performed using clinical metadata alone, specifically age and sex, the model achieved a mean balanced accuracy of 21.84% and an average AUROC of 61.07% across the three cross-validation folds. The relatively low balanced accuracy indicates limited discriminative capability of these clinical features for distinguishing among the seven lung adenocarcinoma subtypes. Although the AUROC suggests that the model captures some degree of class-discriminative information, the results demonstrate that age and sex alone are insufficient to reliably characterize the histological subtype. <br>
+
+When incorporating tissue morphological information extracted from the WSIs, using foundation model patch embeddings followed by ABMIL-based slide-level aggregation, substantially improved classification performance compared with the clinical-metadata-only baseline. Among the three evaluated foundation models, H-OPTIMUS-1 achieved the strongest overall performance, with a mean AUROC of 88.24% and a mean balanced accuracy of 61.81% across the three cross-validation folds. These results demonstrate that WSI-derived morphological representations provide substantially greater discriminative information for distinguishing the seven lung adenocarcinoma subtypes than age and sex alone. The strong AUROC achieved by H-OPTIMUS-1 suggests that its learned patch-level representations effectively capture morphological characteristics relevant to tumour subtype classification. <br>
+
+Integrating clinical metadata (age and sex) with slide-level morphological representations produced mixed results across the cross-validation folds. In particular, the multimodal fusion model achieved balanced accuracies of 62.23% and 65.74% for folds 1 and 2, respectively. However, the benefit of multimodal fusion was not consistent across all folds. For example, in one fold, the fusion model achieved a balanced accuracy of 52.93%, which was lower than the corresponding performance of the slide-level model alone (61.73%). Similarly, the reported slide-only balanced accuracies for the other folds were 56.94% and 66.70%, respectively. The average AUROC is very similar to the slide-level feature classification, which is 88.17%. <br>
+
+Furthermore, an AI-based fusion agent was employed to explore multiple feature-fusion architectures and identify an optimal fusion configuration. The agent evaluated different fusion settings using the validation set, and the configuration achieving the highest validation balanced accuracy was selected and retained for subsequent evaluation on the held-out test set. Across the three cross-validation folds, the best validation balanced accuracies achieved by the agent were 61.90%, 63.80%, and 51.42% for folds 1, 2, and 3, respectively. However, the corresponding test balanced accuracies were 48.98%, 50.79%, and 62.23%, respectively. <br>
+
+Despite the reduction in balanced accuracy, the agent-based fusion approach achieved a mean AUROC of 88.14%, which was comparable to the performance obtained using slide-level morphological features alone and the manually designed fusion of slide-level and clinical metadata representations. However, the substantially lower balanced accuracy on the held-out test data indicates that the agent-based fusion strategy did not provide a consistent improvement in classification performance.
+
+The difference between AUROC and balanced accuracy is particularly noteworthy. While the relatively high AUROC indicates that the learned representations retain considerable discriminative information, the lower balanced accuracy suggests that this information does not consistently translate into accurate class assignments across all seven tumour subtypes. This may reflect challenges associated with class imbalance, decision-boundary selection, or overfitting to the validation data during fusion-architecture selection. <br>
+
+Overall, these findings suggest that the current fusion-agent search space may require further refinement. Expanding the range of candidate architectures, fusion mechanisms, optimization strategies, and regularization approaches explored by the agent may enable more robust identification of fusion configurations that generalize effectively to unseen data. Further investigation is therefore warranted to determine whether a more comprehensive search space can improve the consistency of multimodal fusion across cross-validation folds.
+
+
+
+
 
