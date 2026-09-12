@@ -52,7 +52,7 @@ Predict the **histologic growth pattern (tumor subtype)** of lung adenocarcinoma
 
 ## Python Environment Setup
 
-Please refer to the [Environment setup guide](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/tree/main/docs/INSTALLATION.md) for detailed instructions on how to set up the environment and get started.
+Please refer to the [Environment setup guide](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/docs/INSTALLATION.md) for detailed instructions on how to set up the environment and get started.
 
 ## Hardware Setup
 All experiments were performed on the Windows platform using Python 3.11, PyTorch 2.9, and CUDA 12.8. The system was equipped with an Intel Core i9-12900K processor 64 GB of RAM, and NVIDIA RTX 3090 GPU with 24 GB of VRAM.
@@ -81,11 +81,11 @@ I aim to use one slide per patient based on a deterministic rule, such as select
 - There are 209 distinct patient IDs for 210 patients. Patient ID `8377886` appears twice, with ages 68 and 69 (slides WSI-35/36 and WSI-103/104). We treat these as a single patient, despite the two samples being collected one year apart, and select one sample from each age group (68 and 69). Although the samples were collected one year apart, they may still share patient-specific characteristics, potentially introducing patient-level bias or enabling the model to learn patient-specific patterns. Therefore, both samples are considered to originate from the same patient and are kept within the same data split to prevent potential information leakage between the training, validation, and test sets. <br>
 - Five patients have conflicting subtype labels across their slides (e.g., `8225322`, `8240634`, `8245975`, `8248415`, and `8248805`). We include both slides with their respective labels. However, these slides are treated as belonging to the same patient and therefore must **not** be divided across different data splits (i.e., training, validation, or test). <br>
 
-[`CLWD_Filter_Patients_one_slide.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/CLWD_Filter_Patients_one_slide.ipynb) notebook is used to filter the data for a smaller subset of the original data. ([`CLWD.csv`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/src/csv/CLWD.csv) > [`CLWD_OneSlide.csv`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide.csv)) <br>
+[`CLWD_Filter_Patients_one_slide.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/CLWD_Filter_Patients_one_slide.ipynb) notebook is used to filter the data for a smaller subset of the original data. ([`CLWD.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD.csv) > [`CLWD_OneSlide.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide.csv)) <br>
 
-The data are divided into three folds of training (70%), validation (10%), and test (20%) sets based on the 209 unique patients using [`CLWD_Data_Stratification.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/CLWD_Data_Stratification.ipynb) notebook. Three folds have been used to perform a cross validation over three different splits of the data. <br>
+The data are divided into three folds of training (70%), validation (10%), and test (20%) sets based on the 209 unique patients using [`CLWD_Data_Stratification.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/CLWD_Data_Stratification.ipynb) notebook. Three folds have been used to perform a cross validation over three different splits of the data. <br>
 
-[`CLWD_OneSlide-train.csv`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-train.csv); [`CLWD_OneSlide-val.csv`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-val.csv); [`CLWD_OneSlide-test.csv`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-test.csv); CSV files are generated with patient level stratification.
+[`CLWD_OneSlide-train.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-train.csv); [`CLWD_OneSlide-val.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-val.csv); [`CLWD_OneSlide-test.csv`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/csv/CLWD_OneSlide-test.csv); CSV files are generated with patient level stratification.
 
 | Split      | (%)      | Patients (of 209)| Fold 0 <br> WSIs (of 215)    | Fold 1 <br> WSIs (of 215)    | Fold 2 <br> WSIs (of 215)    |
 | ---------- | -------: | ----------------:| ----------------------------:| ----------------------------:|----------------------------: |
@@ -110,9 +110,9 @@ For example: `WSI-1.svs` VS `WSI-1.jpg`
 
 As the highest-resolution levels of the SVS and JPG images do not correspond, it would be inappropriate to assume that the JPG images represent the full-resolution images at 80× magnification. Furthermore, in the absence of additional acquisition information for the JPG images and the relevant SVS metadata, the objective power and corresponding physical resolution of the JPG images cannot be reliably determined. Therefore, based on this comparison, I decided to use the SVS images for this project, as they provide the necessary metadata to support informed, consistent, and reproducible image-processing and magnification-selection procedures. <br>
 
-[`Check_WSI_metadata.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/Check_WSI_metadata.ipynb) notebook can be used to read SVS metadata. <br>
-[`CLWD_download_svs.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/CLWD_download_svs.ipynb) notebook can be used to download the SVS data. `Download dir: src/data` <br>
-[`hf_repo_download_CLWD.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/hf_repo_download_CLWD.ipynb) notebook can be used to download the JPG data from HuggingFace. `Download dir: src/data_jpg` *Note: this requires huggingface access token* <br>
+[`Check_WSI_metadata.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/Check_WSI_metadata.ipynb) notebook can be used to read SVS metadata. <br>
+[`CLWD_download_svs.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/CLWD_download_svs.ipynb) notebook can be used to download the SVS data. `Download dir: src/data` <br>
+[`hf_repo_download_CLWD.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/hf_repo_download_CLWD.ipynb) notebook can be used to download the JPG data from HuggingFace. `Download dir: src/data_jpg` *Note: this requires huggingface access token* <br>
 
 
 ## Tasks
@@ -141,18 +141,18 @@ Histopathology Patch encoders used in this project:
 | [Virchow2](https://huggingface.co/paige-ai/Virchow2)          |     632             |     1280            |       257           |
 | [H-OPTIMUS-1](https://huggingface.co/bioptimus/H-optimus-1)   |      1100           |      1536           |       896           |
 
-[`scripts/generate_embeddings.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/generate_embeddings.py) script can be used to genetare the embeddings using the following command:
+[`scripts/generate_embeddings.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/generate_embeddings.py) script can be used to genetare the embeddings using the following command:
 
 ```bash
 python scripts/generate_embeddings.py --model_name UNI2-h
 ```
-or all the models can run altogether using [`run_all_embedding_models.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/run_all_embedding_models.py) script on Windows with the following command:
+or all the models can run altogether using [`run_all_embedding_models.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_embedding_models.py) script on Windows with the following command:
 
 ```bash
 python run_all_embedding_models.py
 ```
 
-While using FMs, we have to make sure that each FMs are used as recommended by authors in their corresponding repositories and use their recommended normalization mean and standard deviation on which they have been pretrained. while `UNI2-h`, and `Virchow2` use `[mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]]` normalization mean and standard deviation, while `H-OPTIMUS-1` uses `[mean: [0.707223, 0.578729, 0.703617], std: [0.211883, 0.230117, 0.177517]]` mean and standard deviation. Model are being loaded from [`scripts/FMs/load_models.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/FMs/load_models.py) script along with their given data transform. <br> *Note: it requires huggingface access token and approval from the authors of the given FMs repository.* <br>
+While using FMs, we have to make sure that each FMs are used as recommended by authors in their corresponding repositories and use their recommended normalization mean and standard deviation on which they have been pretrained. while `UNI2-h`, and `Virchow2` use `[mean: [0.485, 0.456, 0.406], std: [0.229, 0.224, 0.225]]` normalization mean and standard deviation, while `H-OPTIMUS-1` uses `[mean: [0.707223, 0.578729, 0.703617], std: [0.211883, 0.230117, 0.177517]]` mean and standard deviation. Model are being loaded from [`scripts/FMs/load_models.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/FMs/load_models.py) script along with their given data transform. <br> *Note: it requires huggingface access token and approval from the authors of the given FMs repository.* <br>
 
 Embeddings can be downloaded: <br>
 [`UNI2-h Embeddings`](https://drive.google.com/file/d/1gANwXbwh3Scc92ShhwbdTN8KCekJGSum/view?usp=sharing)<br>
@@ -174,7 +174,7 @@ In contrast, ABMIL can be independently trained on the patch embeddings produced
 
 This common representation facilitates subsequent multi-FM embedding fusion, in which the slide-level embeddings derived from UNI2-h, Virchow2, and H-OPTIMUS-1 can be combined without requiring additional dimensionality alignment. Thus, ABMIL serves two complementary purposes in our framework: (1) it learns an attention-weighted aggregation of variable numbers of patch-level instances into a compact slide-level representation, and (2) it maps the heterogeneous feature spaces produced by different FMs into a common 1,024-dimensional representation space suitable for downstream fusion and classification. <br>
 
-[`scripts/MIL_wsi_encoder.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/MIL_wsi_encoder.py) script can be used to train ABMIL slide aggregator using the following command:
+[`scripts/MIL_wsi_encoder.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/MIL_wsi_encoder.py) script can be used to train ABMIL slide aggregator using the following command:
 
 ```bash
 python scripts/MIL_wsi_encoder.py --model_name UNI2-h --mode train --fold 0  ## to train the ABMIL
@@ -182,7 +182,7 @@ python scripts/MIL_wsi_encoder.py --model_name UNI2-h --mode train --fold 0  ## 
 python scripts/MIL_wsi_encoder.py --model_name UNI2-h --mode eval --fold 0  ## to evaluate the ABMIL
 ```
 
-or all the ABMIL models can run altogether using [`run_all_MIL_models.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/run_all_MIL_models.py) script on Windows with the following command:
+or all the ABMIL models can run altogether using [`run_all_MIL_models.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_MIL_models.py) script on Windows with the following command:
 
 ```bash
 python run_all_MIL_models.py
@@ -200,7 +200,7 @@ For preprocessing, sex was encoded as a binary categorical variable, with 0 repr
 
 The MLP therefore receives a two-dimensional input vector consisting of the normalized age and binary sex features and produces a probability distribution over the seven tumour subtypes. The implementation of this clinical-feature classifier is illustrated in Figure (b).
 
-[`scripts/clinical_metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/clinical_metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
+[`scripts/clinical_metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/clinical_metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
 
 ```bash
 python scripts/clinical_metadata_classifier.py --mode train --fold 0  ## to train the clinical data tumour classifier
@@ -221,7 +221,7 @@ This fusion strategy enables the model to leverage complementary information fro
 <img width="1000" src="./docs/Slide_Clinical_combined.jpg"> 
 </p>
 
-[`scripts/Slide_with_Metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/Slide_with_Metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
+[`scripts/Slide_with_Metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/Slide_with_Metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
 
 ```bash
 python scripts/Slide_with_Metadata_classifier.py --model_name H-OPTIMUS-1 --mode train --fold 0  ## to train the Slide + Clinical data tumour classifier
@@ -229,7 +229,7 @@ python scripts/Slide_with_Metadata_classifier.py --model_name H-OPTIMUS-1 --mode
 python scripts/Slide_with_Metadata_classifier.py --model_name H-OPTIMUS-1 --mode eval --fold 0  ## to evaluate the Slide + Clinical data tumour classifier
 ```
 
-or all the folds can run altogether using [`run_all_bestMIL_with_Metadata.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/run_all_bestMIL_with_Metadata.py) script on Windows with the following command:
+or all the folds can run altogether using [`run_all_bestMIL_with_Metadata.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_bestMIL_with_Metadata.py) script on Windows with the following command:
 
 ```bash
 python run_all_bestMIL_with_Metadata.py
@@ -263,7 +263,7 @@ Age and sex are passed through as two clinical features. Age is normalized and s
 **Run the Fusion Agent:** <br>
 The first step is to generate and store the slide-level embeddings so that the MIL aggregation model does not need to be repeatedly executed during subsequent fusion experiments. Using the checkpoints of the best-performing MIL aggregation models identified during the slide-level evaluation, slide-level embeddings are generated and saved in the `src/embedding/slide` directory.
 
-This process can be performed using the [`generate_slide_metadata_embeddings.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/generate_slide_metadata_embeddings.py) script. The script supports the generation of both slide-level and clinical metadata embeddings. For example:
+This process can be performed using the [`generate_slide_metadata_embeddings.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/generate_slide_metadata_embeddings.py) script. The script supports the generation of both slide-level and clinical metadata embeddings. For example:
 
 ```bash
 python scripts/generate_slide_metadata_embeddings.py --model_name UNI2-h --mode slide --fold 0
@@ -275,7 +275,7 @@ python scripts/generate_slide_metadata_embeddings.py --model_name UNI2-h --mode 
 
 The same procedure can be applied to the other FMs to generate their corresponding slide-level representations.
 
-Once the slide-level embeddings from all FMs and the clinical metadata embeddings have been generated, the representations are consolidated into a single data dictionary to facilitate multimodal embedding fusion. This can be performed using the [`prepare_fusion_data.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/prepare_fusion_data.py) script:
+Once the slide-level embeddings from all FMs and the clinical metadata embeddings have been generated, the representations are consolidated into a single data dictionary to facilitate multimodal embedding fusion. This can be performed using the [`prepare_fusion_data.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/prepare_fusion_data.py) script:
 
 ```bash
 python scripts/prepare_fusion_data.py --fold 0
@@ -297,7 +297,7 @@ new_data_dict = {
 
 where `N` denotes the number of WSI samples. Each FM contributes a 1024-dimensional slide-level representation, while the clinical metadata consists of two features corresponding to age and sex. The `labels` field contains the corresponding seven-class tumour subtype labels, and `ids` contains the WSI identifiers.
 
-Finally, the fusion experiments can be performed using the [`run_fusion_agent.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/scripts/run_fusion_agent.py) script. The fusion agent searches for an effective fusion strategy using the prepared multimodal representations:
+Finally, the fusion experiments can be performed using the [`run_fusion_agent.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/run_fusion_agent.py) script. The fusion agent searches for an effective fusion strategy using the prepared multimodal representations:
 
 ```bash
 python scripts/run_fusion_agent.py --fold 0
@@ -313,7 +313,7 @@ python scripts/evaluate_best_agent_model.py --fold 0
 
 This workflow separates embedding generation, data preparation, fusion-strategy optimization, and final model evaluation.
 
-or all the folds can run altogether using [`run_all_agens.py`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/run_all_agens.py) script on Windows with the following command:
+or all the folds can run altogether using [`run_all_agens.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_agens.py) script on Windows with the following command:
 
 ```bash
 python run_all_agens.py
@@ -548,7 +548,7 @@ For each configuration, model performance is evaluated on the validation set usi
 ### Evaluation Metrics
 The evaluation results are reported as the mean performance across three cross-validation folds for each experimental configuration. Specifically, performance is evaluated for: (1) classification using clinical metadata alone (age and sex), (2) ABMIL aggregation applied independently to embeddings from each of the three foundation models, (3) the best-performing ABMIL model combined with clinical metadata, and (4) the best-performing multimodal fusion strategy identified by the fusion agent. <br>
 
-The results across three folds are summarized using [`notebooks/summarize_results.ipynb`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/blob/main/notebooks/summarize_results.ipynb) notebook script.
+The results across three folds are summarized using [`notebooks/summarize_results.ipynb`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/notebooks/summarize_results.ipynb) notebook script.
 
 
 | Configuration                               | Macro AUROC $\pm$ std. <br> [95% CI]        | Balanced acc. $\pm$ std. <br> [95% CI] |
@@ -560,7 +560,7 @@ The results across three folds are summarized using [`notebooks/summarize_result
 | H-OPTIMUS-1_ABMIL + metadata (age + sex)    | 88.17 $\pm$ 1.79 <br> [83.72, 92.62]        | 60.30 $\pm$ 6.61 <br> [43.85, 76.74]   |
 | **Fused (agent-selected) + metadata**       | 88.14 $\pm$ 4.20 <br> [77.69, 98.60]        | 54.00 $\pm$ 7.18 <br> [36.15, 71.84]   |
 
-Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
+Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 
 **Best Model:**
 Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
