@@ -1,0 +1,24 @@
+SampleNumber,WSI_ID,Sex,Age,Pathological_Diagnosis,Pathological_Subspecies,Multi_Subtypes,WHO2015_GrowthPattern,WHO2021_GrowthPattern,WHO2021_category,WHO2021_MucinousStatus,Benchmark_Label_7class,Benchmark_Label_2021_6class
+8008524,WSI-361,Female,54,invasive adenocarcinoma (IA),Solid,Solid,Solid,Solid,IA,Non-mucinous,Solid,Solid
+8239884,WSI-367,Male,52,invasive adenocarcinoma (IA),Papillary,Papillary,Papillary,Papillary,IA,Non-mucinous,Papillary,Papillary
+8238261,WSI-366,Female,47,invasive adenocarcinoma (IA),Acinar,Acinar,Acinar,Acinar,IA,Non-mucinous,Acinar,Acinar
+8243986,WSI-374,Female,50,Adenocarcinoma in situ(AIS),In situ,In situ,In situ,In situ,AIS,Non-mucinous,In situ,In situ
+8248415,WSI-399,Female,49,minimally invasive adenocarcinoma (MIA),Acinar,Acinar,Acinar,Acinar,MIA,Non-mucinous,Acinar,Acinar
+8248415,WSI-398,Female,49,minimally invasive adenocarcinoma (MIA),Lepidic,Lepidic,Lepidic,Lepidic,MIA,Non-mucinous,Lepidic,Lepidic
+8250047,WSI-407,Female,43,Adenocarcinoma in situ(AIS),In situ,In situ,In situ,In situ,AIS,Non-mucinous,In situ,In situ
+8373873,WSI-1,Female,48,Adenocarcinoma in situ(AIS),In situ,In situ,In situ,In situ,AIS,Non-mucinous,In situ,In situ
+8133249,WSI-21,Female,56,Adenocarcinoma in situ(AIS),In situ,In situ,In situ,In situ,AIS,Non-mucinous,In situ,In situ
+8377886,WSI-35,Female,68,invasive adenocarcinoma (IA),Papillary,Papillary&Lepidic,Papillary,Papillary,IA,Non-mucinous,Papillary,Papillary
+8377886,WSI-103,Female,69,invasive adenocarcinoma (IA),Papillary,Papillary&Lepidic&Acinar,Papillary,Papillary,IA,Non-mucinous,Papillary,Papillary
+8386241,WSI-66,Male,43,invasive adenocarcinoma (IA),Micropapillary,Acinar&Micropapillary,Micropapillary,Micropapillary,IA,Non-mucinous,Micropapillary,Micropapillary
+8387212,WSI-73,Male,53,Adenocarcinoma in situ(AIS),In situ,In situ,In situ,In situ,AIS,Non-mucinous,In situ,In situ
+8393154,WSI-83,Female,58,invasive adenocarcinoma (IA),Micropapillary,Acinar&Micropapillary,Micropapillary,Micropapillary,IA,Non-mucinous,Micropapillary,Micropapillary
+8396592,WSI-89,Male,70,invasive adenocarcinoma (IA),Micropapillary,Acinar&Micropapillary&Papillary,Micropapillary,Micropapillary,IA,Non-mucinous,Micropapillary,Micropapillary
+8399843,WSI-93,Male,53,invasive adenocarcinoma (IA),Papillary,Papillary,Papillary,Papillary,IA,Non-mucinous,Papillary,Papillary
+8103477,WSI-97,Female,47,invasive adenocarcinoma (IA),Papillary,Papillary&Lepidic,Papillary,Papillary,IA,Non-mucinous,Papillary,Papillary
+8414312,WSI-157,Male,42,invasive adenocarcinoma (IA),Solid,Solid&Acinar&Micropapillary,Solid,Solid,IA,Non-mucinous,Solid,Solid
+8203346,WSI-196,Male,71,invasive adenocarcinoma (IA),Cribriform,Micropapillary&Cribriform&Acinar,Cribriform,Acinar,IA,Non-mucinous,Cribriform,Acinar
+8431695,WSI-207,Female,57,invasive adenocarcinoma (IA),Solid,Solid,Solid,Solid,IA,Non-mucinous,Solid,Solid
+8533034,WSI-295,Female,73,invasive adenocarcinoma (IA),Lepidic,Lepidic,Lepidic,Lepidic,IA,Non-mucinous,Lepidic,Lepidic
+8447059,WSI-300,Female,58,invasive adenocarcinoma (IA),Acinar,Acinar,Acinar,Acinar,IA,Non-mucinous,Acinar,Acinar
+8547959,WSI-315,Female,58,invasive adenocarcinoma (IA),Lepidic,Lepidic,Lepidic,Lepidic,IA,Non-mucinous,Lepidic,Lepidic

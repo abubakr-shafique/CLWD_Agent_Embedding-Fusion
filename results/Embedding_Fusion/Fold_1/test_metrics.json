@@ -1,0 +1,82 @@
+{
+  "n_test_samples": 45,
+  "balanced_accuracy": 0.5079365079365079,
+  "macro_auroc_ovr": 0.8371543728983059,
+  "per_class_auroc_ovr": {
+    "Acinar": 0.7518796992481204,
+    "Cribriform": 0.738095238095238,
+    "In situ": 0.96,
+    "Lepidic": 0.853658536585366,
+    "Micropapillary": 0.885,
+    "Papillary": 0.7654320987654322,
+    "Solid": 0.9060150375939849
+  },
+  "confusion_matrix": [
+    [
+      1,
+      1,
+      0,
+      3,
+      0,
+      0,
+      2
+    ],
+    [
+      0,
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      6,
+      4,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      4,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      2,
+      0,
+      2
+    ],
+    [
+      3,
+      0,
+      0,
+      1,
+      1,
+      2,
+      2
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      6
+    ]
+  ],
+  "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent",
+  "strategy": "early_concat",
+  "validation_balanced_accuracy": 0.6380952380952382
+}

@@ -1,0 +1,28 @@
+Epochs: 9, Model_Name: Virchow2, Optimizer: AdamW,
+Loss_Func: Weighted CrossEntropy: tensor([0.7432, 1.6891, 0.5806, 1.4293, 1.0322, 0.6407, 0.8848],
+       device='cuda:0'),
+Learning Rate: 0.0001, Weight_Decay: 0.0001. 
+Patch_Size: 224,
+Batch_Size: 1, Early_Stop True,
+Embed_dim: 1280, WSI_dim: 1024 
+
+Epoch: 0, Avg_Train_Loss: 1.97, Avg_Train_Accuracy: 36.913, 'Train Balance Accuracy: 31.006 
+Epoch: 0, Avg_Val_Loss: 1.593, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 47.619 
+Model Saved 
+Epoch: 1, Avg_Train_Loss: 1.166, Avg_Train_Accuracy: 50.336, 'Train Balance Accuracy: 44.528 
+Epoch: 1, Avg_Val_Loss: 2.08, Avg_Val_Accuracy: 26.087, Val Balance Accuracy: 24.762 
+Epoch: 2, Avg_Train_Loss: 0.886, Avg_Train_Accuracy: 63.758, 'Train Balance Accuracy: 60.539 
+Epoch: 2, Avg_Val_Loss: 1.863, Avg_Val_Accuracy: 39.13, Val Balance Accuracy: 29.524 
+Epoch: 3, Avg_Train_Loss: 0.484, Avg_Train_Accuracy: 84.564, 'Train Balance Accuracy: 84.464 
+Epoch: 3, Avg_Val_Loss: 1.597, Avg_Val_Accuracy: 39.13, Val Balance Accuracy: 33.333 
+Epoch: 4, Avg_Train_Loss: 0.397, Avg_Train_Accuracy: 91.946, 'Train Balance Accuracy: 91.384 
+Epoch: 4, Avg_Val_Loss: 1.577, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 36.19 
+Model Saved 
+Epoch: 5, Avg_Train_Loss: 0.371, Avg_Train_Accuracy: 91.946, 'Train Balance Accuracy: 90.363 
+Epoch: 5, Avg_Val_Loss: 1.621, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 36.19 
+Epoch: 6, Avg_Train_Loss: 0.341, Avg_Train_Accuracy: 92.617, 'Train Balance Accuracy: 92.749 
+Epoch: 6, Avg_Val_Loss: 1.636, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 34.286 
+Epoch: 7, Avg_Train_Loss: 0.314, Avg_Train_Accuracy: 94.631, 'Train Balance Accuracy: 94.192 
+Epoch: 7, Avg_Val_Loss: 1.664, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 36.19 
+Epoch: 8, Avg_Train_Loss: 0.29, Avg_Train_Accuracy: 93.96, 'Train Balance Accuracy: 94.763 
+Epoch: 8, Avg_Val_Loss: 1.641, Avg_Val_Accuracy: 43.478, Val Balance Accuracy: 36.19 

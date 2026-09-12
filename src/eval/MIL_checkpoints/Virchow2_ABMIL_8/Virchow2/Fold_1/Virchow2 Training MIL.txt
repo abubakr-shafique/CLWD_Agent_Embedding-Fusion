@@ -1,0 +1,32 @@
+Epochs: 9, Model_Name: Virchow2, Optimizer: AdamW,
+Loss_Func: Weighted CrossEntropy: tensor([0.7570, 1.7205, 0.6105, 1.2617, 1.0514, 0.6526, 0.9463],
+       device='cuda:0'),
+Learning Rate: 0.0001, Weight_Decay: 0.0001. 
+Patch_Size: 224,
+Batch_Size: 1, Early_Stop True,
+Embed_dim: 1280, WSI_dim: 1024 
+
+Epoch: 0, Avg_Train_Loss: 2.052, Avg_Train_Accuracy: 29.53, 'Train Balance Accuracy: 26.878 
+Epoch: 0, Avg_Val_Loss: 1.739, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 24.524 
+Model Saved 
+Epoch: 1, Avg_Train_Loss: 1.215, Avg_Train_Accuracy: 52.349, 'Train Balance Accuracy: 47.841 
+Epoch: 1, Avg_Val_Loss: 1.784, Avg_Val_Accuracy: 38.095, Val Balance Accuracy: 30.476 
+Model Saved 
+Epoch: 2, Avg_Train_Loss: 0.95, Avg_Train_Accuracy: 58.389, 'Train Balance Accuracy: 55.766 
+Epoch: 2, Avg_Val_Loss: 1.79, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 32.143 
+Model Saved 
+Epoch: 3, Avg_Train_Loss: 0.615, Avg_Train_Accuracy: 75.839, 'Train Balance Accuracy: 75.27 
+Epoch: 3, Avg_Val_Loss: 1.726, Avg_Val_Accuracy: 28.571, Val Balance Accuracy: 20.952 
+Model Saved 
+Epoch: 4, Avg_Train_Loss: 0.483, Avg_Train_Accuracy: 87.919, 'Train Balance Accuracy: 87.143 
+Epoch: 4, Avg_Val_Loss: 1.795, Avg_Val_Accuracy: 28.571, Val Balance Accuracy: 20.952 
+Epoch: 5, Avg_Train_Loss: 0.451, Avg_Train_Accuracy: 87.919, 'Train Balance Accuracy: 86.65 
+Epoch: 5, Avg_Val_Loss: 1.8, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 24.524 
+Model Saved 
+Epoch: 6, Avg_Train_Loss: 0.416, Avg_Train_Accuracy: 89.262, 'Train Balance Accuracy: 89.158 
+Epoch: 6, Avg_Val_Loss: 1.792, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 25.714 
+Model Saved 
+Epoch: 7, Avg_Train_Loss: 0.396, Avg_Train_Accuracy: 91.275, 'Train Balance Accuracy: 90.159 
+Epoch: 7, Avg_Val_Loss: 1.812, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 25.714 
+Epoch: 8, Avg_Train_Loss: 0.374, Avg_Train_Accuracy: 91.275, 'Train Balance Accuracy: 90.381 
+Epoch: 8, Avg_Val_Loss: 1.923, Avg_Val_Accuracy: 28.571, Val Balance Accuracy: 19.762 

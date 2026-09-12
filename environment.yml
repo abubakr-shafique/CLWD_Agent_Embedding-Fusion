@@ -1,0 +1,19 @@
+name: CLWD
+channels:
+  - defaults
+  - conda-forge
+dependencies:
+  - python=3.11  # You can specify another compatible version like 3.11 or 3.10
+  - pip
+  - pip:
+    - numpy
+    - pandas
+    - scikit-learn
+    - matplotlib
+    - seaborn
+    - tqdm
+    - pillow
+    - opencv-python
+    - huggingface_hub
+    - notebook
+    - scipy

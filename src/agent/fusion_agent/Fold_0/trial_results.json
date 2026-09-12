@@ -1,0 +1,778 @@
+{
+  "trial_budget": 16,
+  "completed_trials": 10,
+  "minimum_material_improvement": 0.001,
+  "patience": 15,
+  "best_trial": {
+    "trial_id": 9,
+    "strategy": "gated_fusion",
+    "config": {
+      "strategy": "gated_fusion",
+      "l2_norm": true,
+      "projection_dim": 256,
+      "hidden_dim": 384,
+      "dropout": 0.5,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "epochs": 20,
+      "batch_size": 16,
+      "seed": 43
+    },
+    "val_balanced_accuracy": 0.619047619047619,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
+  },
+  "best_neural_trial": {
+    "trial_id": 9,
+    "strategy": "gated_fusion",
+    "config": {
+      "strategy": "gated_fusion",
+      "l2_norm": true,
+      "projection_dim": 256,
+      "hidden_dim": 384,
+      "dropout": 0.5,
+      "learning_rate": 0.0001,
+      "weight_decay": 0.0001,
+      "epochs": 20,
+      "batch_size": 16,
+      "seed": 43
+    },
+    "val_balanced_accuracy": 0.619047619047619,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
+  },
+  "trials": [
+    {
+      "trial_id": 1,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "early_concat",
+        "l2_norm": false,
+        "projection_dim": null,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.5428571428571428,
+      "previous_best_balanced_accuracy": -1.0,
+      "is_new_best": true,
+      "is_material_gain": true,
+      "details": {
+        "best_val_balanced_accuracy": 0.5428571428571428,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.419047619047619
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.5428571428571428
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.39999999999999997
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.4285714285714285
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.3523809523809524
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.35238095238095235
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.30476190476190473
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_001_early_concat.pt"
+    },
+    {
+      "trial_id": 2,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "early_concat",
+        "l2_norm": true,
+        "projection_dim": null,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.5428571428571428,
+      "previous_best_balanced_accuracy": 0.5428571428571428,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {
+        "best_val_balanced_accuracy": 0.5428571428571428,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.4761904761904762
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.49523809523809526
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.4761904761904762
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.5428571428571428
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.4761904761904763
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.35238095238095235
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.35238095238095235
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.39999999999999997
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.30476190476190473
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.30476190476190473
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_002_early_concat.pt"
+    },
+    {
+      "trial_id": 3,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "early_concat",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.5428571428571429,
+      "previous_best_balanced_accuracy": 0.5428571428571428,
+      "is_new_best": true,
+      "is_material_gain": false,
+      "details": {
+        "best_val_balanced_accuracy": 0.5428571428571429,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.20952380952380953
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.21904761904761907
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.2571428571428572
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.19047619047619047
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.26666666666666666
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.3619047619047619
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.1619047619047619
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.1619047619047619
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.23809523809523808
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.31428571428571433
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.2571428571428572
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.5428571428571429
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.2571428571428571
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.2571428571428571
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.42857142857142855
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.44761904761904764
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.4952380952380952
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_003_early_concat.pt"
+    },
+    {
+      "trial_id": 4,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "late_prob_average",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.43809523809523815,
+      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {},
+      "checkpoint_path": null
+    },
+    {
+      "trial_id": 5,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "late_logit_average",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.43809523809523815,
+      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {},
+      "checkpoint_path": null
+    },
+    {
+      "trial_id": 6,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "late_weighted_vote",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.4857142857142857,
+      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {
+        "stream_weights": {
+          "uni2": 0.36996115407882174,
+          "virchow2": 0.21997690242524534,
+          "optimus": 0.40995695451977543,
+          "meta": 0.00010498897615750348
+        }
+      },
+      "checkpoint_path": null
+    },
+    {
+      "trial_id": 7,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "stacking",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.5142857142857143,
+      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {
+        "stacker_C": 0.1,
+        "stacker_feature_dim": 28
+      },
+      "checkpoint_path": null
+    },
+    {
+      "trial_id": 8,
+      "proposal_reason": "Coverage phase: evaluate a required fusion strategy before spending additional trials on one family.",
+      "config": {
+        "strategy": "gated_fusion",
+        "l2_norm": true,
+        "projection_dim": 512,
+        "hidden_dim": 384,
+        "dropout": 0.3,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 42
+      },
+      "val_balanced_accuracy": 0.5714285714285714,
+      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "is_new_best": true,
+      "is_material_gain": true,
+      "details": {
+        "best_val_balanced_accuracy": 0.5714285714285714,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.21904761904761902
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.1619047619047619
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.37142857142857144
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.46666666666666673
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.4761904761904762
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.4952380952380952
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.42857142857142855
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.4285714285714285
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.4285714285714285
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.4285714285714285
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.38095238095238093
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_008_gated_fusion.pt"
+    },
+    {
+      "trial_id": 9,
+      "proposal_reason": "Gated fusion is strongest so far; reduce capacity and increase regularization for small-sample stability.",
+      "config": {
+        "strategy": "gated_fusion",
+        "l2_norm": true,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.5,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 43
+      },
+      "val_balanced_accuracy": 0.619047619047619,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
+      "is_new_best": true,
+      "is_material_gain": true,
+      "details": {
+        "best_val_balanced_accuracy": 0.619047619047619,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.23809523809523808
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.4285714285714285
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.2285714285714286
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.26666666666666666
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.23809523809523808
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.31428571428571433
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.37142857142857144
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.419047619047619
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.3619047619047619
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.619047619047619
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.38095238095238093
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_009_gated_fusion.pt"
+    },
+    {
+      "trial_id": 10,
+      "proposal_reason": "Gated fusion is strongest so far; repeat with a second seed to assess seed sensitivity.",
+      "config": {
+        "strategy": "gated_fusion",
+        "l2_norm": true,
+        "projection_dim": 384,
+        "hidden_dim": 768,
+        "dropout": 0.5,
+        "learning_rate": 0.0001,
+        "weight_decay": 0.0001,
+        "epochs": 20,
+        "batch_size": 16,
+        "seed": 44
+      },
+      "val_balanced_accuracy": 0.5714285714285714,
+      "previous_best_balanced_accuracy": 0.619047619047619,
+      "is_new_best": false,
+      "is_material_gain": false,
+      "details": {
+        "best_val_balanced_accuracy": 0.5714285714285714,
+        "history": [
+          {
+            "epoch": 1,
+            "val_balanced_accuracy": 0.4095238095238095
+          },
+          {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.14285714285714285
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.2285714285714286
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.44761904761904764
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.37142857142857144
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.42857142857142855
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.4952380952380952
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.5142857142857143
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.4952380952380952
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.4952380952380952
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.5428571428571428
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.5428571428571428
+          },
+          {
+            "epoch": 19,
+            "val_balanced_accuracy": 0.4952380952380952
+          },
+          {
+            "epoch": 20,
+            "val_balanced_accuracy": 0.5428571428571428
+          }
+        ]
+      },
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_010_gated_fusion.pt"
+    }
+  ]
+}

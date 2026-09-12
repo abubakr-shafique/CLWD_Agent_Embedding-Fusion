@@ -1,0 +1,33 @@
+Epochs: 10, Model_Name: UNI2-h, Optimizer: AdamW,
+Loss_Func: Weighted CrossEntropy: tensor([0.7640, 1.7364, 0.5969, 1.2734, 1.0611, 0.6586, 0.9095],
+       device='cuda:0'),
+Learning Rate: 0.0001, Weight_Decay: 0.0001. 
+Patch_Size: 224,
+Batch_Size: 1, Early_Stop True,
+Embed_dim: 1536, WSI_dim: 1024 
+
+Epoch: 0, Avg_Train_Loss: 1.834, Avg_Train_Accuracy: 29.139, 'Train Balance Accuracy: 23.52 
+Epoch: 0, Avg_Val_Loss: 1.408, Avg_Val_Accuracy: 23.81, Val Balance Accuracy: 18.095 
+Model Saved 
+Epoch: 1, Avg_Train_Loss: 1.157, Avg_Train_Accuracy: 53.642, 'Train Balance Accuracy: 47.395 
+Epoch: 1, Avg_Val_Loss: 2.349, Avg_Val_Accuracy: 28.571, Val Balance Accuracy: 29.048 
+Model Saved 
+Epoch: 2, Avg_Train_Loss: 0.882, Avg_Train_Accuracy: 67.55, 'Train Balance Accuracy: 65.668 
+Epoch: 2, Avg_Val_Loss: 1.873, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 37.143 
+Model Saved 
+Epoch: 3, Avg_Train_Loss: 0.536, Avg_Train_Accuracy: 83.444, 'Train Balance Accuracy: 81.765 
+Epoch: 3, Avg_Val_Loss: 1.534, Avg_Val_Accuracy: 47.619, Val Balance Accuracy: 41.905 
+Model Saved 
+Epoch: 4, Avg_Train_Loss: 0.449, Avg_Train_Accuracy: 90.728, 'Train Balance Accuracy: 90.051 
+Epoch: 4, Avg_Val_Loss: 1.5, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 38.333 
+Model Saved 
+Epoch: 5, Avg_Train_Loss: 0.416, Avg_Train_Accuracy: 90.728, 'Train Balance Accuracy: 90.164 
+Epoch: 5, Avg_Val_Loss: 1.581, Avg_Val_Accuracy: 38.095, Val Balance Accuracy: 30.0 
+Epoch: 6, Avg_Train_Loss: 0.395, Avg_Train_Accuracy: 90.728, 'Train Balance Accuracy: 90.272 
+Epoch: 6, Avg_Val_Loss: 1.646, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 25.238 
+Epoch: 7, Avg_Train_Loss: 0.364, Avg_Train_Accuracy: 91.391, 'Train Balance Accuracy: 91.145 
+Epoch: 7, Avg_Val_Loss: 1.6, Avg_Val_Accuracy: 38.095, Val Balance Accuracy: 33.571 
+Epoch: 8, Avg_Train_Loss: 0.334, Avg_Train_Accuracy: 93.377, 'Train Balance Accuracy: 93.463 
+Epoch: 8, Avg_Val_Loss: 1.695, Avg_Val_Accuracy: 38.095, Val Balance Accuracy: 30.0 
+Epoch: 9, Avg_Train_Loss: 0.316, Avg_Train_Accuracy: 94.702, 'Train Balance Accuracy: 94.335 
+Epoch: 9, Avg_Val_Loss: 1.749, Avg_Val_Accuracy: 33.333, Val Balance Accuracy: 25.238 

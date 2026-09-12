@@ -1,0 +1,11 @@
+Model Name: H-OPTIMUS-1,
+Target Patch Size: 224,
+Target Magnification: 20,
+Scanner Magnification: 80,
+Target Patch Size 224 at 80x Magnification: 896,
+Downsample Scale to target Magnification: 4,
+Batch_Size: 32,
+Average WSI Processing time: 896.7712093400396 seconds,
+Average WSI Read time: 31.888252972066404 seconds,
+Average Number of Patches per WSI: 13794,
+Embedding Dimension: 1536

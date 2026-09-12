@@ -1,0 +1,33 @@
+Epochs: 9, Model_Name: H-OPTIMUS-1, Optimizer: AdamW,
+Loss_Func: Weighted CrossEntropy: tensor([0.7640, 1.7364, 0.5969, 1.2734, 1.0611, 0.6586, 0.9095],
+       device='cuda:0'),
+Learning Rate: 0.0001, Weight_Decay: 0.0001. 
+Patch_Size: 224,
+Batch_Size: 1, Early_Stop True,
+Embed_dim: 1536, WSI_dim: 1024 
+
+Epoch: 0, Avg_Train_Loss: 2.016, Avg_Train_Accuracy: 31.788, 'Train Balance Accuracy: 26.242 
+Epoch: 0, Avg_Val_Loss: 1.415, Avg_Val_Accuracy: 23.81, Val Balance Accuracy: 16.905 
+Model Saved 
+Epoch: 1, Avg_Train_Loss: 1.062, Avg_Train_Accuracy: 60.927, 'Train Balance Accuracy: 54.643 
+Epoch: 1, Avg_Val_Loss: 2.567, Avg_Val_Accuracy: 23.81, Val Balance Accuracy: 24.286 
+Model Saved 
+Epoch: 2, Avg_Train_Loss: 0.927, Avg_Train_Accuracy: 64.238, 'Train Balance Accuracy: 62.512 
+Epoch: 2, Avg_Val_Loss: 1.983, Avg_Val_Accuracy: 52.381, Val Balance Accuracy: 45.476 
+Model Saved 
+Epoch: 3, Avg_Train_Loss: 0.548, Avg_Train_Accuracy: 81.457, 'Train Balance Accuracy: 79.845 
+Epoch: 3, Avg_Val_Loss: 1.558, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 33.571 
+Model Saved 
+Epoch: 4, Avg_Train_Loss: 0.446, Avg_Train_Accuracy: 89.404, 'Train Balance Accuracy: 88.844 
+Epoch: 4, Avg_Val_Loss: 1.479, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 33.571 
+Model Saved 
+Epoch: 5, Avg_Train_Loss: 0.414, Avg_Train_Accuracy: 89.404, 'Train Balance Accuracy: 88.908 
+Epoch: 5, Avg_Val_Loss: 1.546, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 34.762 
+Model Saved 
+Epoch: 6, Avg_Train_Loss: 0.391, Avg_Train_Accuracy: 92.053, 'Train Balance Accuracy: 91.603 
+Epoch: 6, Avg_Val_Loss: 1.567, Avg_Val_Accuracy: 42.857, Val Balance Accuracy: 33.571 
+Epoch: 7, Avg_Train_Loss: 0.363, Avg_Train_Accuracy: 93.377, 'Train Balance Accuracy: 92.51 
+Epoch: 7, Avg_Val_Loss: 1.557, Avg_Val_Accuracy: 38.095, Val Balance Accuracy: 30.0 
+Epoch: 8, Avg_Train_Loss: 0.337, Avg_Train_Accuracy: 95.364, 'Train Balance Accuracy: 94.446 
+Epoch: 8, Avg_Val_Loss: 1.657, Avg_Val_Accuracy: 52.381, Val Balance Accuracy: 45.476 
+Model Saved 

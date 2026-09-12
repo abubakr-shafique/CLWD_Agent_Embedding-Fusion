@@ -1,0 +1,16 @@
+                precision    recall  f1-score   support
+
+        Acinar       0.00      0.00      0.00         7
+    Cribriform       0.00      0.00      0.00         3
+       In situ       0.47      0.78      0.58         9
+       Lepidic       0.00      0.00      0.00         5
+Micropapillary       0.00      0.00      0.00         5
+     Papillary       0.38      0.38      0.38         8
+         Solid       0.15      0.50      0.23         6
+
+      accuracy                           0.30        43
+     macro avg       0.14      0.24      0.17        43
+  weighted avg       0.19      0.30      0.22        43
+
+
+Balanced Accuracy: 23.61
