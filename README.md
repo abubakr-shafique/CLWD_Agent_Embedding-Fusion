@@ -544,10 +544,10 @@ The results across three folds are summarized using [`notebooks/summarize_result
 Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 
 **Best Model:**
-H-OPTIMUS-1 with ABMIL slide level aggregation has shown the best performance across all the tasks performed.
+Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
 | Column 1 | Column 2 |
 | :---: | :---: |
-| ![Image 1](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg) | ![Image 2](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_ROC.jpg) |
+| ![Overall Results](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg) | ![Confusion Matrix](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_CM.jpg) |
 | ![Image 3](image3.png) | ![Image 4](image4.png) |
 
 ## Discussion
