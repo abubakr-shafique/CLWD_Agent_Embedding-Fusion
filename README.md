@@ -632,11 +632,11 @@ Detailed evaluation results for each cross-validation fold are provided in the [
 **Best Model:**
 Among all experimental configurations evaluated, agentic Fusion model achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 68.70% and an AUROC of 92.50%, representing the highest performance observed across the evaluated approaches.
 
-Confusion Matrix
+**Confusion Matrix**
 <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/Embedding_Fusion/Fold_2/BestFusion_test_results_CM.jpg" width="100%">
 
 
-ROC Curves
+**ROC Curves**
 <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/Embedding_Fusion/Fold_2/BestFusion_test_ROC.jpg" width="100%">
 
 ## Discussion
