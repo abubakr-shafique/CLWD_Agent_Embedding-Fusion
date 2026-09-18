@@ -37,8 +37,9 @@ parser.add_argument('--model_name', type=str, default=Meta_config.model_name, ch
 parser.add_argument('--output_dir', type=str, default=Meta_config.output_dir)
 parser.add_argument('--result_dir', type=str, default=Meta_config.result_dir)
 parser.add_argument('--mode', type=str, default="train", choices=['train', 'eval'])
+parser.add_argument('--rep_learn', type=str, default="yes", choices=['yes', 'no'])
 parser.add_argument('--batch_size', type=int, default=Meta_config.batch_size)
-parser.add_argument('--fold', type=int, default=Meta_config.fold)
+parser.add_argument('--fold', type=int, default=0)
 parser.add_argument('--seed', type=int, default=8, help="Random seed for reproducible experiment (default: 8)")
 
 args = parser.parse_args()
@@ -85,7 +86,7 @@ if __name__ == '__main__':
     if logg:
         print(f"Class weights: {class_weights}")
 
-    model = metadata_utils.AgeSexClassifier(num_classes=NUM_CLASSES) ## Custom Linear CLassifier
+    model = metadata_utils.AgeSexClassifier(num_classes=NUM_CLASSES) ## Custom Linear CLassifier        
 
     if logg:
         print(model)
@@ -93,9 +94,30 @@ if __name__ == '__main__':
     checkpoint_save_dir = os.path.join(args.output_dir, "Clinical_metadata_classifier")
     os.makedirs(checkpoint_save_dir, exist_ok=True)
     if args.mode == "train":
-        print(f"Training Linear Classifier")
-        ##train the MIL model
-        metadata_utils.train_loop(model=model, data_loader_Train=train_dataloader, data_loader_Val=val_dataloader, cls_weights=class_weights, output_dir=checkpoint_save_dir)
+        print(f"Training Linear Classifier\n")
+
+        if args.rep_learn == "yes":
+            ## Representation Learning for Age Sex
+            print("Representation Learning\n")
+            metadata_utils.train_loop_representation_learning(model=model, data_loader_Train=train_dataloader, data_loader_Val=val_dataloader, Fold=args.fold, output_dir=checkpoint_save_dir)
+
+            ## Load the best model 
+            state_dict = torch.load(os.path.join(checkpoint_save_dir, f"{args.model_name}", f"Fold_{args.fold}", f"{args.model_name}_Representation.pth"))
+            # Load the state dictionary into the model
+            model.load_state_dict(state_dict, strict=True)
+
+            ## Freeze the model except classification head
+            for i, (name, param) in enumerate(model.named_parameters()):
+                if i < 10:
+                    param.requires_grad = False
+                else:
+                    param.requires_grad = True
+                if logg:
+                    print(f"Layer {i}: {name} | Size: {param.size()} | Requires_Grad: {param.requires_grad}")
+
+        ##train the MLP model
+        print("Learning classifier\n")
+        metadata_utils.train_loop(model=model, data_loader_Train=train_dataloader, data_loader_Val=val_dataloader, Fold=args.fold, cls_weights=class_weights, output_dir=checkpoint_save_dir)
 
     else:
         print(f"Evaluating Linear Classifier")
@@ -105,12 +127,12 @@ if __name__ == '__main__':
 
         try:
             # Load the best state dictionary from a file
-            checkpoint_load_dir = os.path.join(checkpoint_save_dir, f"{args.model_name}", f"Fold_{Meta_config.fold}")
+            checkpoint_load_dir = os.path.join(checkpoint_save_dir, f"{args.model_name}", f"Fold_{args.fold}")
             state_dict = torch.load(os.path.join(checkpoint_load_dir, f"{args.model_name}_Classifier.pth"))
             # Load the state dictionary into the model
             model.load_state_dict(state_dict, strict=True)
 
-            eval_history = metadata_utils.eval_loop(model=model, data_loader_Test=test_dataloader, Class_idx_to_Label=index_to_label, Class_Label_to_idx=label_to_index, results_dir=results_save_dir, n_classes=NUM_CLASSES, label_names=label_names)
+            eval_history = metadata_utils.eval_loop(model=model, data_loader_Test=test_dataloader, Class_idx_to_Label=index_to_label, Class_Label_to_idx=label_to_index, Fold=args.fold, results_dir=results_save_dir, n_classes=NUM_CLASSES, label_names=label_names)
 
         except:
             print("No trained MIL model found / or / Evaluation Error.")

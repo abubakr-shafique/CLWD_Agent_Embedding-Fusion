@@ -115,7 +115,7 @@ if __name__ == '__main__':
         model = metadata_utils.AgeSexClassifier(num_classes=n_classes)
 
         checkpoint_load_dir = os.path.join(args.checkpoint_dir, "Clinical_metadata_classifier", f"{args.model_name}", f"Fold_{args.fold}")
-        state_dict = torch.load(os.path.join(checkpoint_load_dir, f"{args.model_name}_Classifier.pth"))
+        state_dict = torch.load(os.path.join(checkpoint_load_dir, f"{args.model_name}_Representation.pth"))
         # Load the state dictionary into the model
         model.load_state_dict(state_dict, strict=True)
 

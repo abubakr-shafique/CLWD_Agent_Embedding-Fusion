@@ -39,12 +39,12 @@ StrategyName = Literal[
 class TrialConfig:
     strategy: StrategyName
     l2_norm: bool = True
-    projection_dim: int = 256
-    hidden_dim: int = 384
-    dropout: float = 0.30
+    projection_dim: int = 384
+    hidden_dim: int = 512
+    dropout: float = 0.3
     learning_rate: float = 1e-4
     weight_decay: float = 1e-4
-    epochs: int = 20
+    epochs: int = 100
     batch_size: int = 16
     seed: int = 42
 
@@ -75,7 +75,7 @@ class FusionSearchAgent:
         output_dir: str | Path,
         device: str = "cuda",
         max_trials: int = 25,
-        patience: int = 4,
+        patience: int = 10,
         min_improvement: float = 0.02,
     ) -> None:
         self.dims = dims
@@ -182,7 +182,7 @@ class FusionSearchAgent:
         - Learned gated fusion.
         """
         common = {
-            "epochs": 20,
+            "epochs": 100,
             "batch_size": 16,
             "seed": 42,
         }
@@ -203,7 +203,7 @@ class FusionSearchAgent:
             TrialConfig(
                 strategy="early_concat",
                 l2_norm=True,
-                projection_dim=256,
+                projection_dim=384,
                 **common,
             ),
             TrialConfig(
@@ -225,7 +225,7 @@ class FusionSearchAgent:
             TrialConfig(
                 strategy="gated_fusion",
                 l2_norm=True,
-                projection_dim=512,
+                projection_dim=768,
                 **common,
             ),
         ]

@@ -14,12 +14,12 @@
       "dropout": 0.3,
       "learning_rate": 0.0001,
       "weight_decay": 0.0001,
-      "epochs": 20,
+      "epochs": 100,
       "batch_size": 16,
       "seed": 42
     },
-    "val_balanced_accuracy": 0.5142857142857143,
-    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\best_validation_model.pt"
+    "val_balanced_accuracy": 0.45476190476190476,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\best_validation_model.pt"
   },
   "best_neural_trial": {
     "trial_id": 1,
@@ -32,12 +32,12 @@
       "dropout": 0.3,
       "learning_rate": 0.0001,
       "weight_decay": 0.0001,
-      "epochs": 20,
+      "epochs": 100,
       "batch_size": 16,
       "seed": 42
     },
-    "val_balanced_accuracy": 0.5142857142857143,
-    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\best_validation_model.pt"
+    "val_balanced_accuracy": 0.45476190476190476,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\best_validation_model.pt"
   },
   "trials": [
     {
@@ -51,44 +51,44 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.45476190476190476,
       "previous_best_balanced_accuracy": -1.0,
       "is_new_best": true,
       "is_material_gain": true,
       "details": {
-        "best_val_balanced_accuracy": 0.5142857142857143,
+        "best_val_balanced_accuracy": 0.45476190476190476,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.16904761904761906
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.5142857142857143
+            "val_balanced_accuracy": 0.45476190476190476
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.33571428571428574
-          },
-          {
-            "epoch": 4,
-            "val_balanced_accuracy": 0.419047619047619
-          },
-          {
-            "epoch": 5,
-            "val_balanced_accuracy": 0.4428571428571429
-          },
-          {
-            "epoch": 6,
             "val_balanced_accuracy": 0.37142857142857144
           },
           {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.37142857142857144
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.419047619047619
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.419047619047619
+          },
+          {
             "epoch": 7,
-            "val_balanced_accuracy": 0.2523809523809524
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 8,
@@ -96,19 +96,19 @@
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.3595238095238095
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.3476190476190476
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.2523809523809524
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 13,
@@ -116,7 +116,7 @@
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 15,
@@ -124,15 +124,15 @@
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.3476190476190476
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.4666666666666667
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 19,
@@ -140,11 +140,15 @@
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.419047619047619
+          },
+          {
+            "epoch": 21,
+            "val_balanced_accuracy": 0.419047619047619
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_001_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_001_early_concat.pt"
     },
     {
       "trial_id": 2,
@@ -157,44 +161,44 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.4666666666666667,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.4428571428571429,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.4666666666666667,
+        "best_val_balanced_accuracy": 0.4428571428571429,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.4428571428571429
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.40714285714285714
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.41904761904761906
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.2523809523809524
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.34761904761904766
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.3
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 8,
@@ -202,7 +206,7 @@
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 10,
@@ -210,23 +214,23 @@
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.41904761904761906
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.3476190476190476
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 16,
@@ -234,15 +238,15 @@
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.39523809523809517
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.3476190476190476
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.4666666666666667
+            "val_balanced_accuracy": 0.419047619047619
           },
           {
             "epoch": 20,
@@ -250,7 +254,7 @@
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_002_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_002_early_concat.pt"
     },
     {
       "trial_id": 3,
@@ -263,12 +267,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
       "val_balanced_accuracy": 0.38333333333333336,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
@@ -276,59 +280,59 @@
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.09523809523809523
+            "val_balanced_accuracy": 0.2523809523809524
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.1619047619047619
-          },
-          {
-            "epoch": 3,
-            "val_balanced_accuracy": 0.1619047619047619
-          },
-          {
-            "epoch": 4,
-            "val_balanced_accuracy": 0.10476190476190476
-          },
-          {
-            "epoch": 5,
-            "val_balanced_accuracy": 0.1142857142857143
-          },
-          {
-            "epoch": 6,
-            "val_balanced_accuracy": 0.2571428571428572
-          },
-          {
-            "epoch": 7,
-            "val_balanced_accuracy": 0.2571428571428572
-          },
-          {
-            "epoch": 8,
-            "val_balanced_accuracy": 0.22857142857142856
-          },
-          {
-            "epoch": 9,
-            "val_balanced_accuracy": 0.2642857142857143
-          },
-          {
-            "epoch": 10,
             "val_balanced_accuracy": 0.31190476190476185
           },
           {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.38333333333333336
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.38333333333333336
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.38333333333333336
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 8,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
             "epoch": 11,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.33571428571428574
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.33571428571428574
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.33571428571428574
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.3833333333333333
+            "val_balanced_accuracy": 0.33571428571428574
           },
           {
             "epoch": 15,
@@ -340,7 +344,7 @@
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.38333333333333336
+            "val_balanced_accuracy": 0.33571428571428574
           },
           {
             "epoch": 18,
@@ -353,10 +357,18 @@
           {
             "epoch": 20,
             "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 21,
+            "val_balanced_accuracy": 0.33571428571428574
+          },
+          {
+            "epoch": 22,
+            "val_balanced_accuracy": 0.33571428571428574
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_003_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_003_early_concat.pt"
     },
     {
       "trial_id": 4,
@@ -369,12 +381,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.3238095238095238,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.419047619047619,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {},
@@ -391,12 +403,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.3238095238095238,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.419047619047619,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {},
@@ -413,20 +425,20 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
       "val_balanced_accuracy": 0.37142857142857144,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
         "stream_weights": {
-          "uni2": 0.33329630041106545,
-          "virchow2": 0.24071399474132502,
-          "optimus": 0.4258786060808058,
-          "meta": 0.00011109876680368847
+          "uni2": 0.30094043887147337,
+          "virchow2": 0.2539184952978057,
+          "optimus": 0.3479623824451411,
+          "meta": 0.09717868338557993
         }
       },
       "checkpoint_path": null
@@ -442,12 +454,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.4428571428571429,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.37142857142857144,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
@@ -467,36 +479,36 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.4785714285714286,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.4428571428571429,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.4785714285714286,
+        "best_val_balanced_accuracy": 0.4428571428571429,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.09523809523809523
+            "val_balanced_accuracy": 0.4428571428571429
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.24761904761904763
+            "val_balanced_accuracy": 0.369047619047619
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.27619047619047615
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.4309523809523809
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.3595238095238095
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 6,
@@ -504,15 +516,15 @@
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.4785714285714286
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.4309523809523809
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.4309523809523809
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 10,
@@ -520,47 +532,47 @@
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.33571428571428574
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.34761904761904766
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.419047619047619
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.41904761904761906
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.41904761904761906
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.3833333333333333
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.41904761904761906
+            "val_balanced_accuracy": 0.3833333333333333
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_008_gated_fusion.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_008_gated_fusion.pt"
     },
     {
       "trial_id": 9,
@@ -577,12 +589,12 @@
         "batch_size": 16,
         "seed": 43
       },
-      "val_balanced_accuracy": 0.4357142857142858,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.3761904761904762,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.4357142857142858,
+        "best_val_balanced_accuracy": 0.3761904761904762,
         "history": [
           {
             "epoch": 1,
@@ -590,83 +602,83 @@
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.19047619047619047
+            "val_balanced_accuracy": 0.3761904761904762
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.33333333333333337
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.3904761904761905
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.3904761904761905
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.3904761904761905
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.4357142857142858
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.29285714285714287
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.2476190476190476
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.22857142857142856
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.22857142857142856
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.3238095238095238
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.24523809523809526
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.3595238095238096
+            "val_balanced_accuracy": 0.24523809523809526
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_009_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_009_early_concat.pt"
     },
     {
       "trial_id": 10,
@@ -683,96 +695,96 @@
         "batch_size": 16,
         "seed": 43
       },
-      "val_balanced_accuracy": 0.43095238095238103,
-      "previous_best_balanced_accuracy": 0.5142857142857143,
+      "val_balanced_accuracy": 0.41904761904761906,
+      "previous_best_balanced_accuracy": 0.45476190476190476,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.43095238095238103,
+        "best_val_balanced_accuracy": 0.41904761904761906,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.1619047619047619
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.1142857142857143
+            "val_balanced_accuracy": 0.30476190476190473
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.19999999999999998
+            "val_balanced_accuracy": 0.34761904761904766
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.19999999999999998
+            "val_balanced_accuracy": 0.31190476190476196
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.2571428571428572
+            "val_balanced_accuracy": 0.34761904761904766
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.29285714285714287
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.29285714285714287
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.1880952380952381
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.2571428571428572
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.2761904761904762
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.2642857142857143
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.31190476190476196
+            "val_balanced_accuracy": 0.41904761904761906
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.43095238095238103
+            "val_balanced_accuracy": 0.41904761904761906
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_010_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_2\\checkpoints\\trial_010_early_concat.pt"
     }
   ]
 }

@@ -187,18 +187,22 @@ or all the ABMIL models can run altogether using [`run_all_MIL_models.py`](https
 ```bash
 python run_all_MIL_models.py
 ```
-The figure below (a)shows the ABMIL framework for slide aggregation. <br>
+The figure below shows the ABMIL framework for slide aggregation. <br>
 
 <p align="center">
-<img width="1000" src="./docs/Slide_Aggregation_Metadata_Classification.jpg"> 
+<img width="1000" src="./docs/ABMIL.jpg"> 
 </p>
 
 **MetaData (Sex + Age) Encoding and Classification:** <br>
-To incorporate clinical information into the classification framework, age and sex were used as two clinical features for predicting the seven histopathological tumour subtypes. These features were provided as inputs to a simple multilayer perceptron (MLP) classifier, allowing the model to learn a nonlinear mapping between the clinical variables and the tumour subtype. <br>
+To incorporate clinical information into the classification framework, patient age and sex were used as two clinical features for the prediction of seven histopathological tumour subtypes. The proposed clinical-feature classifier was implemented in two stages. In the first stage, age and sex were provided as inputs to an MLP, which was trained to predict the corresponding clinical features at the output. This initial stage was designed to learn a generalized representation of the clinical information. In the second stage, the backbone MLP layers responsible for generalized representation learning were frozen, and a classification head was added to map the learned representation to the seven tumour subtypes. This two-stage strategy enables the model to first learn a generalized representation of the clinical features and subsequently use this representation for tumour subtype classification. <br>
 
-For preprocessing, sex was encoded as a binary categorical variable, with 0 representing female and 1 representing male. Age was converted to a normalized continuous feature by dividing the patient's age in years by 100, resulting in values approximately within the range of 0–1 for the study population. This normalization places the continuous age feature on a scale comparable to the binary sex feature and can facilitate stable optimization during model training. <br>
+For preprocessing, sex was encoded as a binary categorical variable, with 0 representing female and 1 representing male. Age was represented as a normalized continuous feature using min–max normalization based on the minimum and maximum ages observed across the entire dataset (24 and 80 years, respectively). The normalized age values were therefore mapped to a range of 0–1. This normalization places the age feature on a comparable numerical scale and facilitates stable optimization during model training. <br>
 
-The MLP therefore receives a two-dimensional input vector consisting of the normalized age and binary sex features and produces a probability distribution over the seven tumour subtypes. The implementation of this clinical-feature classifier is illustrated in Figure (b).
+The MLP consequently receives a two-dimensional input vector consisting of the normalized age and binary sex features and produces a probability distribution over the seven histopathological tumour subtypes. The two-stage implementation of the clinical-feature classifier is illustrated in Figure below.
+
+<p align="center">
+<img width="1000" src="./docs/Clinical Classification.jpg"> 
+</p>
 
 [`scripts/clinical_metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/clinical_metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
 
@@ -208,25 +212,45 @@ python scripts/clinical_metadata_classifier.py --mode train --fold 0  ## to trai
 python scripts/clinical_metadata_classifier.py --mode eval --fold 0  ## to evaluate the clinical data tumour classifier
 ```
 
+or all the metadata classification folds can run altogether using [`run_all_Metadata.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_Metadata.py) script on Windows with the following command:
+
+```bash
+python run_all_Metadata.py
+```
+
 **MIL Model + MetaData (Sex + Age) Encoding and Classification:** <br>
-To further improve slide-level classification performance, the best-performing MIL model identified during the slide-level evaluation is integrated with clinical metadata, specifically age and sex. The selected MIL aggregator is retained as a frozen feature extractor, such that its learned parameters are not updated during the multimodal fusion stage. This preserves the slide-level representation learned during the preceding evaluation while allowing the clinical and fusion components to adapt to the classification task. <br>
+To further improve slide-level classification performance, the best-performing MIL model identified during the slide-level evaluation was integrated with clinical metadata, specifically patient age and sex. The selected MIL aggregator was retained as a frozen slide-level feature extractor. The corresponding best-performing model checkpoints were used to generate a 1024-dimensional feature vector for each slide. These slide-level embeddings were subsequently stored in the `src/embedding/slide` directory for downstream fusion with clinical features. <br>
 
-In parallel, the clinical features are processed using a trainable MLP. The normalized age and binary-encoded sex features are provided as input to the MLP, which learns a compact clinical representation. The resulting clinical embedding is then combined with the slide-level embedding generated by the frozen MIL model. Specifically, the two representations are concatenated to form a joint multimodal feature vector that incorporates both morphological information from the WSI and patient-level clinical information. <br>
+```bash
+python scripts/generate_slide_metadata_embeddings.py --model_name H-OPTIMUS-1 --mode slide --fold 0  ## to generate slide embeddings from ABMIL model
+```
 
-The concatenated representation is subsequently passed to a second trainable MLP, which serves as the fusion and classification head. This network learns interactions between the slide-level and clinical representations and maps the resulting joint feature space to the seven tumour subtypes. Thus, the overall architecture consists of a frozen MIL-based slide encoder, a trainable clinical MLP, and a trainable fusion/classification MLP. <br>
+In parallel, the clinical metadata were processed using the previously trained MLP-based clinical encoder. The normalized age and binary-encoded sex features were provided as inputs to the frozen MLP encoder, which generated a 384-dimensional clinical representation for each patient. These metadata embeddings were stored separately in the `src/embedding/metadata_SexAge` directory. <br>
 
-This fusion strategy enables the model to leverage complementary information from two modalities: histomorphological features captured from the WSI and clinical characteristics represented by age and sex. The overall architecture for integrating the slide-level representation with clinical metadata is illustrated in the figure below.
+```bash
+python scripts/generate_slide_metadata_embeddings.py --model_name AgeSex_Linear --mode metadata --fold 0  ## to generate metadata embeddings from MLP representation model
+```
+
+or all the slide and metadata embedding generation models and folds can run altogether using [`run_all_slide_embedding_models.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_slide_embedding_models.py) script on Windows with the following command:
+
+```bash
+python run_all_slide_embedding_models.py
+```
+
+The resulting slide-level and clinical representations were concatenated to form a joint multimodal feature vector. This concatenated representation was then provided as input to a trainable MLP, which served as the fusion and classification head. The fusion network learns interactions between the histomorphological and clinical representations and maps the resulting joint feature space to the seven histopathological tumour subtypes. <br>
+
+Overall, the proposed multimodal architecture consists of a frozen MIL-based slide encoder, a frozen MLP-based clinical encoder, and a trainable MLP fusion and classification head. This fusion strategy enables the model to leverage complementary information from two modalities: histomorphological features extracted from the WSI and clinical characteristics represented by patient age and sex. The overall architecture for integrating slide-level representations with clinical metadata is illustrated in Figure below.
 
 <p align="center">
 <img width="1000" src="./docs/Slide_Clinical_combined.jpg"> 
 </p>
 
-[`scripts/Slide_with_Metadata_classifier.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/Slide_with_Metadata_classifier.py) script can be used to train clinical metadata classifier using the following command:
+[`scripts/Slide_with_Metadata_classifier_embeddingsOnly.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/Slide_with_Metadata_classifier_embeddingsOnly.py) script can be used to train clinical metadata classifier using the following command:
 
 ```bash
-python scripts/Slide_with_Metadata_classifier.py --model_name H-OPTIMUS-1 --mode train --fold 0  ## to train the Slide + Clinical data tumour classifier
+python scripts/Slide_with_Metadata_classifier_embeddingsOnly.py --model_name H-OPTIMUS-1 --mode train --fold 0  ## to train the Slide + Clinical data tumour classifier
 
-python scripts/Slide_with_Metadata_classifier.py --model_name H-OPTIMUS-1 --mode eval --fold 0  ## to evaluate the Slide + Clinical data tumour classifier
+python scripts/Slide_with_Metadata_classifier_embeddingsOnly.py --model_name H-OPTIMUS-1 --mode eval --fold 0  ## to evaluate the Slide + Clinical data tumour classifier
 ```
 
 or all the folds can run altogether using [`run_all_bestMIL_with_Metadata.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_bestMIL_with_Metadata.py) script on Windows with the following command:
@@ -289,13 +313,13 @@ new_data_dict = {
     "uni2": (N, 1024),
     "virchow2": (N, 1024),
     "optimus": (N, 1024),
-    "meta": (N, 2),
+    "meta": (N, 384),
     "labels": (N,),
     "ids": (N,)
 }
 ```
 
-where `N` denotes the number of WSI samples. Each FM contributes a 1024-dimensional slide-level representation, while the clinical metadata consists of two features corresponding to age and sex. The `labels` field contains the corresponding seven-class tumour subtype labels, and `ids` contains the WSI identifiers.
+where `N` denotes the number of WSI samples. Each FM contributes a 1024-dimensional slide-level representation, while the clinical metadata consists of 384-dimensional feature vector representating age and sex. The `labels` field contains the corresponding seven-class tumour subtype labels, and `ids` contains the WSI identifiers.
 
 Finally, the fusion experiments can be performed using the [`run_fusion_agent.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/scripts/run_fusion_agent.py) script. The fusion agent searches for an effective fusion strategy using the prepared multimodal representations:
 
@@ -316,7 +340,7 @@ This workflow separates embedding generation, data preparation, fusion-strategy 
 or all the folds can run altogether using [`run_all_agens.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_agens.py) script on Windows with the following command:
 
 ```bash
-python run_all_agens.py
+python run_all_agents.py
 ```
 
 **Fusion Search Space:** <br>
@@ -516,34 +540,77 @@ Training configurations are stored in [`scripts/config`](https://github.com/abub
 For patch-level feature extraction, the recommended inference settings provided by the respective foundation model authors were used to generate patch embeddings from the WSIs. This ensured that each FM was evaluated using its intended preprocessing and feature-extraction configuration. <br>
 
 **ABMIL Training:** <br>
-For training the ABMIL aggregation models, the training set was used for model optimization, while the validation set was used to monitor model performance and select the best-performing checkpoint. To account for class imbalance, a weighted cross-entropy loss was employed, with class weights determined from the training data. <br>
+For training the ABMIL aggregation models for each fold, the training set was used for model optimization, while the validation set was used to monitor model performance and select the best-performing checkpoint. 
 
-The models were optimized using the AdamW optimizer with an initial learning rate of ($1\times10^{-4}$) and a weight decay of ($1\times10^{-4}$). A step-based learning-rate scheduler was applied with a decay factor ($\gamma$) of 0.1 and a step size of 3 epochs. A minimum learning-rate threshold of ($1\times10^{-6}$) was imposed to prevent the learning rate from decreasing below this value during training. <br>
+```
+ABMIL Training Config:
+- Optimizer: AdamW (learning rate = 1e-4, and Weight decay = 1e-4)
+- learning rate scheduler: learning rate decay with $\gamma$=0.1 after every 3 iterations. (Learning rate will stop decaying at 1e-7)
+- Loss: Weighted CrossEntropy Loss (weights are computed based on the training set)
+- Epochs: 10
+- batch size: 1
+- Best Model: Either lowest loss or best validation balanced accuracy.
+```
 
-Each ABMIL model was trained for a maximum of 10 epochs (each FM and each epoch) with a batch size of one. The best-performing model checkpoint was selected based on validation performance, using either the lowest validation loss or the highest validation balanced accuracy as the model-selection criterion. Balanced accuracy was used to account for potential class imbalance and to provide a more representative measure of performance across the seven tumour subtypes. <br>
+MIL config can also be accessed using [`scripts/config/MIL_config.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/scripts/config/MIL_config.py) script.
+ <br>
 
 To ensure a fair comparison across FMs, the same training configuration and optimization parameters were used for the ABMIL aggregation models operating on embeddings from all three foundation models. Thus, differences in slide-level performance can be more directly attributed to the underlying FM representations rather than differences in the ABMIL training procedure. <br>
 
 **MetaData Training:** <br>
-For the metadata-only classification model, a simple multilayer perceptron (MLP) was trained using age and sex as the input clinical features. The model was optimized using the AdamW optimizer with an initial learning rate of ($1\times10^{-4}$) and a weight decay of ($1\times10^{-4}$). A step-based learning-rate scheduler was employed with a decay factor ($\gamma$) of 0.1 and a step size of 50 epochs. The learning rate was constrained to a minimum value of ($1\times10^{-7}$) to prevent it from decreasing below this threshold during training. <br>
+For the metadata-only classification model, a simple multilayer perceptron (MLP) was trained using age and sex as the input clinical features. 
 
-The MLP was trained for a maximum of 200 epochs, with early stopping enabled using a patience of 50 epochs. A batch size of 32 was used for training. Given that the clinical metadata consist of only two features and are shared across the corresponding slide-level samples, a relatively large batch size can be used without introducing substantial computational overhead. <br>
+```
+Metadata Representation Learning and classifier Training Config:
+- Optimizer: AdamW (learning rate = 1e-3, and Weight decay = 0)
+- learning rate scheduler: learning rate decay with $\gamma$=0.1 after every 10 iterations. (Learning rate will stop decaying at 1e-7)
+- Loss: mean squared error (MSE) for representation learning only
+- Loss: Weighted CrossEntropy Loss (weights are computed based on the training set)
+- Epochs: 200
+- Early stopping: tolerance of 50 epochs (training breaks if no improvement in 50 epochs)
+- batch size: 1
+- Best Model: best validation balanced accuracy.
+```
+
+metadata config can also be accessed using [`scripts/config/metadata_classifier_config.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/scripts/config/metadata_classifier_config.py) script.
+ <br>
 
 The same training configuration and hyperparameters were applied consistently across all cross-validation folds to ensure a comparable evaluation. The model checkpoint achieving the highest validation balanced accuracy was selected as the best-performing model for each fold. Balanced accuracy was used as the model-selection criterion to account for potential class imbalance among the seven tumour subtypes. <br>
 
 **Best MIL model + MetaData Training:** <br>
-To integrate clinical metadata, consisting of age and sex, with the slide-level representation generated by the best-performing MIL model, an MLP-based fusion strategy was employed. The selected ABMIL aggregation model was frozen during fusion training, such that its learned parameters remained unchanged. This ensures that the slide-level representation learned during the preceding MIL evaluation is preserved, while the trainable fusion network learns how to integrate morphological and clinical information. <br>
+To integrate clinical metadata, consisting of age and sex, with the slide-level representation generated by the best-performing MIL model, an MLP-based fusion strategy was employed. 
 
-The trainable fusion model was optimized using the AdamW optimizer with an initial learning rate of ($1\times10^{-4}$) and a weight decay of ($1\times10^{-4}$). A step-based learning-rate scheduler was used with a decay factor ($\gamma$) of 0.1 and a step size of 3 epochs. The learning rate was constrained to a minimum of ($1\times10^{-6}$) to prevent it from decreasing below this threshold during training. <br>
+```
+Best ABMIL + Metadata Training Config:
+- Optimizer: AdamW (learning rate = 1e-4, and Weight decay = 1e-4)
+- learning rate scheduler: learning rate decay with $\gamma$=0.1 after every 3 iterations. (Learning rate will stop decaying at 1e-7)
+- Loss: Weighted CrossEntropy Loss (weights are computed based on the training set)
+- Epochs: 100
+- Early stopping: tolerance of 50 epochs (training breaks if no improvement in 50 epochs)
+- batch size: 1
+- Best Model: best validation balanced accuracy.
+```
 
-The fusion model was trained for a maximum of 10 epochs, with a batch size of 1. This training procedure was performed independently for each cross-validation fold. During training, the frozen MIL aggregator generated the slide-level representation, while the clinical features were processed by the trainable MLP and subsequently integrated with the slide representation through another MLP fusion network. The best-performing model checkpoint was selected based on validation performance, using the highest validation balanced accuracy as the model-selection criterion.
+slide + metadata config can also be accessed using [`scripts/config/slide_metadata_config`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/scripts/config/slide_metadata_config) script.
+ <br>
+
+This training procedure was performed independently for each cross-validation fold.
 
 **Fusion Agen Training:** <br>
-The fusion agent evaluates multiple model configurations to identify the best-performing strategy for integrating the slide-level and clinical representations. While the agent explores different fusion configurations and model settings, the initial learning rate, weight decay, and learning-rate scheduling strategy are kept fixed across all configurations and previous MIL and fusion strategy to ensure a controlled comparison. <br>
+The fusion agent evaluates multiple model configurations to identify the best-performing strategy for integrating the slide-level and clinical representations. While the agent explores different fusion configurations and model settings. <br>
 
-A batch size of 16 is used for fusion training for maximum of 20 epochs. This is feasible because the slide-level embeddings generated by the ABMIL aggregators have been projected into a common 1024-dimensional representation space across all three foundation models. Consequently, the input representations have consistent dimensionality, allowing the same batch configuration to be applied across the different FM fusion experiments. <br>
+```
+ABMIL (UNI2-h, Virchow2, and H-OPTIMUS-1) + Metadata Embedding Fusion Training Config:
+- Optimizer: AdamW (learning rate = 1e-4, and Weight decay = 1e-4)
+- learning rate scheduler: learning rate decay with $\gamma$=0.1 after every 10 iterations. (Learning rate will stop decaying at 1e-7)
+- Loss: Weighted CrossEntropy Loss (weights are computed based on the training set)
+- Epochs: 100
+- Early stopping: tolerance of 50 epochs (training breaks if no improvement in 50 epochs)
+- batch size: 16
+- Best Model: best validation balanced accuracy.
+```
 
-For each configuration, model performance is evaluated on the validation set using balanced accuracy. The model achieving the highest validation balanced accuracy is selected as the best-performing fusion model. Both the corresponding model checkpoint and its associated fusion configuration are stored for subsequent evaluation on the held-out test data. This procedure ensures that the final evaluation is performed using the fusion configuration that demonstrated the strongest validation performance. <br>
+Both the corresponding model checkpoint and its associated fusion configuration are stored for subsequent evaluation on the held-out test data. This procedure ensures that the final evaluation is performed using the fusion configuration that demonstrated the strongest validation performance. <br>
 
 ### Evaluation Metrics
 The evaluation results are reported as the mean performance across three cross-validation folds for each experimental configuration. Specifically, performance is evaluated for: (1) classification using clinical metadata alone (age and sex), (2) ABMIL aggregation applied independently to embeddings from each of the three foundation models, (3) the best-performing ABMIL model combined with clinical metadata, and (4) the best-performing multimodal fusion strategy identified by the fusion agent. <br>
@@ -553,12 +620,12 @@ The results across three folds are summarized using [`notebooks/summarize_result
 
 | Configuration                               | Macro AUROC $\pm$ std. <br> [95% CI]        | Balanced acc. $\pm$ std. <br> [95% CI] |
 | ------------------------------------------- | ------------------------------------------- | ---------------------------------------|
-| Metadata only (age + sex)                   | 61.07 $\pm$ 4.23 <br> [50.55, 71.58]        | 21.84 $\pm$ 1.60 <br> [17.85, 25.82]   |
+| Metadata only (age + sex)                   | 61.08 $\pm$ 3.04 <br> [53.50, 68.65]        | 23.95 $\pm$ 2.10 <br> [18.73, 29.17]   |
 | UNI2-h_ABMIL                                | 86.75 $\pm$ 3.34 <br> [78.45, 95.06]        | 51.82 $\pm$ 2.65 <br> [45.22, 58.42]   |
 | Virchow2_ABMIL                              | 85.32 $\pm$ 3.78 <br> [75.92, 94.71]        | 52.86 $\pm$ 8.19 <br> [32.51, 73.21]   |
 | H-OPTIMUS-1_ABMIL                           | **88.24 $\pm$ 2.19 <br> [82.79, 93.69]**    | **61.81 $\pm$ 4.91 <br> [49.60, 74.02]**   |
-| H-OPTIMUS-1_ABMIL + metadata (age + sex)    | 88.17 $\pm$ 1.79 <br> [83.72, 92.62]        | 60.30 $\pm$ 6.61 <br> [43.85, 76.74]   |
-| **Fused (agent-selected) + metadata**       | 88.14 $\pm$ 4.20 <br> [77.69, 98.60]        | 54.00 $\pm$ 7.18 <br> [36.15, 71.84]   |
+| H-OPTIMUS-1_ABMIL + metadata (age + sex)    | **88.06 $\pm$ 3.45 <br> [79.48, 96.64]**    | **62.13 $\pm$ 1.90 <br> [57.39, 66.86]**   |
+| **Fused (agent-selected) + metadata**       | **88.30 $\pm$ 3.17 <br> [80.42, 96.18]**    | **63.43 $\pm$ 4.81 <br> [51.46, 75.39]**   |
 
 Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 

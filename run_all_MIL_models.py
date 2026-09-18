@@ -2,7 +2,7 @@ import os, sys
 
 
 generate_embeddings = "scripts/MIL_wsi_encoder.py"
-Models = ["UNI2-h", "H-OPTIMUS-1", "Virchow2"]
+Models = ["UNI2-h", "Virchow2", "H-OPTIMUS-1"]
 Folds = [0, 1, 2]
 
 if sys.platform == "win32":

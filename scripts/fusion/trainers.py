@@ -90,7 +90,7 @@ def train_fusion_model(
     device: torch.device,
     learning_rate: float = 1e-4,
     weight_decay: float = 1e-4,
-    epochs: int = 50,
+    epochs: int = 100,
     batch_size: int = 16,
     seed: int = 42,
 ) -> tuple[nn.Module, dict]:
@@ -104,10 +104,14 @@ def train_fusion_model(
         lr=learning_rate,
         weight_decay=weight_decay,
     )
-    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=3, gamma=0.1)
-    current_lr = 1e-4
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=10, gamma=0.1)
+    current_lr = 0
     weights = class_weights(train_data["labels"]).to(device)
     criterion = nn.CrossEntropyLoss(weight=weights)
+
+    early_stop = True
+    tolerance = 50
+    es = 0
 
     best_state = None
     best_val_score = -1.0
@@ -137,6 +141,8 @@ def train_fusion_model(
         )
 
         current_lr = optimizer.param_groups[0]["lr"]
+        if current_lr > 1e-6:
+            scheduler.step()
 
         val_pred = prob_val.argmax(axis=1)
         val_bal_acc = balanced_accuracy_score(y_val, val_pred)
@@ -149,9 +155,12 @@ def train_fusion_model(
         if val_bal_acc > best_val_score:
             best_val_score = float(val_bal_acc)
             best_state = copy.deepcopy(model.state_dict())
+            es = 0
 
-    if current_lr > 1e-6:
-        scheduler.step()
+        es = es+1
+        if es >= tolerance and early_stop:
+            break
+
 
     model.load_state_dict(best_state)
 

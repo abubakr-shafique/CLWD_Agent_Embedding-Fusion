@@ -14,7 +14,7 @@ import project_dirs as pdir
 import config.MIL_config as MIL_config
 import utils.fusion_data_utils as fusion_utils
 
-logg = False
+logg = True
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
@@ -73,19 +73,23 @@ if __name__ == '__main__':
     embedding_root_dir_UNI2 = os.path.join(args.embedding_dir, "slide", f"{FMs[0]}_{args.target_patch_size}_{args.target_mag}x", f"Fold_{args.fold}")
     embedding_root_dir_Virchow2 = os.path.join(args.embedding_dir, "slide", f"{FMs[1]}_{args.target_patch_size}_{args.target_mag}x", f"Fold_{args.fold}")
     embedding_root_dir_OPTIMUS = os.path.join(args.embedding_dir, "slide", f"{FMs[2]}_{args.target_patch_size}_{args.target_mag}x", f"Fold_{args.fold}")
+    embedding_root_dir_MetaData = os.path.join(args.embedding_dir, "metadata_SexAge", f"AgeSex_Linear", f"Fold_{args.fold}")
 
     train_dataset = fusion_utils.Slide_Clinical_Dataset(train_csv_Data, label_to_index, sex_to_index,
                                                         embedding_root_FM1=embedding_root_dir_UNI2,
                                                         embedding_root_FM2=embedding_root_dir_Virchow2,
-                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS)
+                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS,
+                                                        embedding_root_metadata = embedding_root_dir_MetaData)
     val_dataset = fusion_utils.Slide_Clinical_Dataset(val_csv_Data, label_to_index, sex_to_index,
                                                         embedding_root_FM1=embedding_root_dir_UNI2,
                                                         embedding_root_FM2=embedding_root_dir_Virchow2,
-                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS)
+                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS,
+                                                        embedding_root_metadata = embedding_root_dir_MetaData)
     test_dataset = fusion_utils.Slide_Clinical_Dataset(test_csv_Data, label_to_index, sex_to_index,
                                                         embedding_root_FM1=embedding_root_dir_UNI2,
                                                         embedding_root_FM2=embedding_root_dir_Virchow2,
-                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS)
+                                                        embedding_root_FM3=embedding_root_dir_OPTIMUS,
+                                                        embedding_root_metadata = embedding_root_dir_MetaData)
 
     train_dataloader = DataLoader(train_dataset, batch_size=16, shuffle=False, drop_last=False)
     val_dataloader = DataLoader(val_dataset, batch_size=16, shuffle=False, drop_last=False)

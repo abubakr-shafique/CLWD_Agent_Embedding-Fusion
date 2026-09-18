@@ -16,7 +16,7 @@ class ClassifierHead(nn.Module):
         self,
         input_dim: int,
         hidden_dim: int = 1024,
-        dropout: float = 0.2,
+        dropout: float = 0.3,
         num_classes: int = NUM_CLASSES,
     ) -> None:
         super().__init__()

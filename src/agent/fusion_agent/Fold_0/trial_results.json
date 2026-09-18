@@ -4,40 +4,40 @@
   "minimum_material_improvement": 0.001,
   "patience": 15,
   "best_trial": {
-    "trial_id": 9,
-    "strategy": "gated_fusion",
+    "trial_id": 3,
+    "strategy": "early_concat",
     "config": {
-      "strategy": "gated_fusion",
+      "strategy": "early_concat",
       "l2_norm": true,
       "projection_dim": 256,
       "hidden_dim": 384,
-      "dropout": 0.5,
+      "dropout": 0.3,
       "learning_rate": 0.0001,
       "weight_decay": 0.0001,
-      "epochs": 20,
+      "epochs": 100,
       "batch_size": 16,
-      "seed": 43
+      "seed": 42
     },
-    "val_balanced_accuracy": 0.619047619047619,
-    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
+    "val_balanced_accuracy": 0.5714285714285714,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
   },
   "best_neural_trial": {
-    "trial_id": 9,
-    "strategy": "gated_fusion",
+    "trial_id": 3,
+    "strategy": "early_concat",
     "config": {
-      "strategy": "gated_fusion",
+      "strategy": "early_concat",
       "l2_norm": true,
       "projection_dim": 256,
       "hidden_dim": 384,
-      "dropout": 0.5,
+      "dropout": 0.3,
       "learning_rate": 0.0001,
       "weight_decay": 0.0001,
-      "epochs": 20,
+      "epochs": 100,
       "batch_size": 16,
-      "seed": 43
+      "seed": 42
     },
-    "val_balanced_accuracy": 0.619047619047619,
-    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
+    "val_balanced_accuracy": 0.5714285714285714,
+    "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\best_validation_model.pt"
   },
   "trials": [
     {
@@ -51,52 +51,52 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.5428571428571428,
+      "val_balanced_accuracy": 0.5238095238095238,
       "previous_best_balanced_accuracy": -1.0,
       "is_new_best": true,
       "is_material_gain": true,
       "details": {
-        "best_val_balanced_accuracy": 0.5428571428571428,
+        "best_val_balanced_accuracy": 0.5238095238095238,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.419047619047619
+            "val_balanced_accuracy": 0.49523809523809526
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.2857142857142857
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.5428571428571428
+            "val_balanced_accuracy": 0.4761904761904762
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.39999999999999997
+            "val_balanced_accuracy": 0.4476190476190475
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.4285714285714285
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.3333333333333333
-          },
-          {
-            "epoch": 7,
             "val_balanced_accuracy": 0.38095238095238093
           },
           {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.4761904761904762
+          },
+          {
             "epoch": 8,
-            "val_balanced_accuracy": 0.3333333333333333
+            "val_balanced_accuracy": 0.2857142857142857
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.3523809523809524
+            "val_balanced_accuracy": 0.49523809523809526
           },
           {
             "epoch": 10,
@@ -104,23 +104,23 @@
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.35238095238095235
-          },
-          {
-            "epoch": 12,
-            "val_balanced_accuracy": 0.30476190476190473
-          },
-          {
-            "epoch": 13,
             "val_balanced_accuracy": 0.3333333333333333
           },
           {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
             "epoch": 14,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.38095238095238093
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 16,
@@ -128,7 +128,7 @@
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 18,
@@ -140,11 +140,15 @@
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 21,
+            "val_balanced_accuracy": 0.3333333333333333
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_001_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_001_early_concat.pt"
     },
     {
       "trial_id": 2,
@@ -157,48 +161,48 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
       "val_balanced_accuracy": 0.5428571428571428,
-      "previous_best_balanced_accuracy": 0.5428571428571428,
-      "is_new_best": false,
-      "is_material_gain": false,
+      "previous_best_balanced_accuracy": 0.5238095238095238,
+      "is_new_best": true,
+      "is_material_gain": true,
       "details": {
         "best_val_balanced_accuracy": 0.5428571428571428,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.4761904761904762
-          },
-          {
-            "epoch": 2,
-            "val_balanced_accuracy": 0.49523809523809526
-          },
-          {
-            "epoch": 3,
-            "val_balanced_accuracy": 0.4761904761904762
-          },
-          {
-            "epoch": 4,
             "val_balanced_accuracy": 0.5428571428571428
           },
           {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.42857142857142855
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.5047619047619047
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.45714285714285713
+          },
+          {
             "epoch": 5,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.3619047619047619
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.40952380952380946
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.4761904761904763
+            "val_balanced_accuracy": 0.4285714285714285
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.3333333333333333
+            "val_balanced_accuracy": 0.2857142857142857
           },
           {
             "epoch": 9,
@@ -210,7 +214,7 @@
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.35238095238095235
+            "val_balanced_accuracy": 0.3619047619047619
           },
           {
             "epoch": 12,
@@ -218,23 +222,23 @@
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.2857142857142857
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.39999999999999997
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.2857142857142857
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 18,
@@ -246,11 +250,11 @@
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.30476190476190473
+            "val_balanced_accuracy": 0.3333333333333333
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_002_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_002_early_concat.pt"
     },
     {
       "trial_id": 3,
@@ -263,100 +267,176 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.5428571428571429,
+      "val_balanced_accuracy": 0.5714285714285714,
       "previous_best_balanced_accuracy": 0.5428571428571428,
       "is_new_best": true,
-      "is_material_gain": false,
+      "is_material_gain": true,
       "details": {
-        "best_val_balanced_accuracy": 0.5428571428571429,
+        "best_val_balanced_accuracy": 0.5714285714285714,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.20952380952380953
-          },
-          {
-            "epoch": 2,
-            "val_balanced_accuracy": 0.21904761904761907
-          },
-          {
-            "epoch": 3,
-            "val_balanced_accuracy": 0.2571428571428572
-          },
-          {
-            "epoch": 4,
             "val_balanced_accuracy": 0.2857142857142857
           },
           {
+            "epoch": 2,
+            "val_balanced_accuracy": 0.2857142857142857
+          },
+          {
+            "epoch": 3,
+            "val_balanced_accuracy": 0.4476190476190475
+          },
+          {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.38095238095238093
+          },
+          {
             "epoch": 5,
-            "val_balanced_accuracy": 0.19047619047619047
+            "val_balanced_accuracy": 0.3333333333333333
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.26666666666666666
+            "val_balanced_accuracy": 0.4761904761904762
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.3619047619047619
+            "val_balanced_accuracy": 0.4761904761904762
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.1619047619047619
-          },
-          {
-            "epoch": 9,
-            "val_balanced_accuracy": 0.1619047619047619
-          },
-          {
-            "epoch": 10,
-            "val_balanced_accuracy": 0.23809523809523808
-          },
-          {
-            "epoch": 11,
-            "val_balanced_accuracy": 0.31428571428571433
-          },
-          {
-            "epoch": 12,
-            "val_balanced_accuracy": 0.2571428571428572
-          },
-          {
-            "epoch": 13,
-            "val_balanced_accuracy": 0.5428571428571429
-          },
-          {
-            "epoch": 14,
-            "val_balanced_accuracy": 0.2571428571428571
-          },
-          {
-            "epoch": 15,
-            "val_balanced_accuracy": 0.2571428571428571
-          },
-          {
-            "epoch": 16,
-            "val_balanced_accuracy": 0.47619047619047616
-          },
-          {
-            "epoch": 17,
-            "val_balanced_accuracy": 0.47619047619047616
-          },
-          {
-            "epoch": 18,
             "val_balanced_accuracy": 0.42857142857142855
           },
           {
+            "epoch": 9,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
+            "epoch": 10,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 11,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 12,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 14,
+            "val_balanced_accuracy": 0.42857142857142855
+          },
+          {
+            "epoch": 15,
+            "val_balanced_accuracy": 0.4761904761904762
+          },
+          {
+            "epoch": 16,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 17,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 18,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
             "epoch": 19,
-            "val_balanced_accuracy": 0.44761904761904764
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.4952380952380952
+            "val_balanced_accuracy": 0.5714285714285714
+          },
+          {
+            "epoch": 21,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 22,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 23,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 24,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 25,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 26,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 27,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 28,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 29,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 30,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 31,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 32,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 33,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 34,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 35,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 36,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 37,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 38,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 39,
+            "val_balanced_accuracy": 0.5238095238095238
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_003_early_concat.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_003_early_concat.pt"
     },
     {
       "trial_id": 4,
@@ -369,12 +449,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.43809523809523815,
-      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "val_balanced_accuracy": 0.3333333333333333,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {},
@@ -391,12 +471,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.43809523809523815,
-      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "val_balanced_accuracy": 0.3333333333333333,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {},
@@ -413,20 +493,20 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.4857142857142857,
-      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "val_balanced_accuracy": 0.3333333333333333,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
         "stream_weights": {
-          "uni2": 0.36996115407882174,
-          "virchow2": 0.21997690242524534,
-          "optimus": 0.40995695451977543,
-          "meta": 0.00010498897615750348
+          "uni2": 0.28787878787878785,
+          "virchow2": 0.34848484848484845,
+          "optimus": 0.3333333333333333,
+          "meta": 0.030303030303030325
         }
       },
       "checkpoint_path": null
@@ -442,12 +522,12 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.5142857142857143,
-      "previous_best_balanced_accuracy": 0.5428571428571429,
+      "val_balanced_accuracy": 0.35238095238095235,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
@@ -467,109 +547,117 @@
         "dropout": 0.3,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
-        "epochs": 20,
+        "epochs": 100,
         "batch_size": 16,
         "seed": 42
       },
-      "val_balanced_accuracy": 0.5714285714285714,
-      "previous_best_balanced_accuracy": 0.5428571428571429,
-      "is_new_best": true,
-      "is_material_gain": true,
+      "val_balanced_accuracy": 0.5238095238095238,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
+      "is_new_best": false,
+      "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.5714285714285714,
+        "best_val_balanced_accuracy": 0.5238095238095238,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.21904761904761902
+            "val_balanced_accuracy": 0.43809523809523815
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.1619047619047619
+            "val_balanced_accuracy": 0.2857142857142857
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.46666666666666673
-          },
-          {
-            "epoch": 5,
-            "val_balanced_accuracy": 0.3333333333333333
-          },
-          {
-            "epoch": 6,
-            "val_balanced_accuracy": 0.4761904761904762
-          },
-          {
-            "epoch": 7,
             "val_balanced_accuracy": 0.4952380952380952
           },
           {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.45714285714285713
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
             "epoch": 8,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.4476190476190475
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.5714285714285714
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.5714285714285714
-          },
-          {
-            "epoch": 12,
             "val_balanced_accuracy": 0.42857142857142855
           },
           {
-            "epoch": 13,
+            "epoch": 12,
             "val_balanced_accuracy": 0.5238095238095238
           },
           {
+            "epoch": 13,
+            "val_balanced_accuracy": 0.47619047619047616
+          },
+          {
             "epoch": 14,
-            "val_balanced_accuracy": 0.4285714285714285
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.4285714285714285
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.4285714285714285
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 21,
+            "val_balanced_accuracy": 0.5238095238095238
+          },
+          {
+            "epoch": 22,
+            "val_balanced_accuracy": 0.5238095238095238
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_008_gated_fusion.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_008_gated_fusion.pt"
     },
     {
       "trial_id": 9,
-      "proposal_reason": "Gated fusion is strongest so far; reduce capacity and increase regularization for small-sample stability.",
+      "proposal_reason": "Early concatenation is strongest so far; test lower dimensional projections and stronger regularization.",
       "config": {
-        "strategy": "gated_fusion",
+        "strategy": "early_concat",
         "l2_norm": true,
-        "projection_dim": 256,
-        "hidden_dim": 384,
+        "projection_dim": 128,
+        "hidden_dim": 256,
         "dropout": 0.5,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
@@ -577,162 +665,162 @@
         "batch_size": 16,
         "seed": 43
       },
-      "val_balanced_accuracy": 0.619047619047619,
+      "val_balanced_accuracy": 0.47619047619047616,
       "previous_best_balanced_accuracy": 0.5714285714285714,
-      "is_new_best": true,
-      "is_material_gain": true,
+      "is_new_best": false,
+      "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.619047619047619,
+        "best_val_balanced_accuracy": 0.47619047619047616,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.23809523809523808
+            "val_balanced_accuracy": 0.14285714285714285
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.4285714285714285
+            "val_balanced_accuracy": 0.30476190476190473
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.2285714285714286
-          },
-          {
-            "epoch": 4,
-            "val_balanced_accuracy": 0.2857142857142857
-          },
-          {
-            "epoch": 5,
-            "val_balanced_accuracy": 0.26666666666666666
-          },
-          {
-            "epoch": 6,
-            "val_balanced_accuracy": 0.23809523809523808
-          },
-          {
-            "epoch": 7,
             "val_balanced_accuracy": 0.31428571428571433
           },
           {
+            "epoch": 4,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 5,
+            "val_balanced_accuracy": 0.33333333333333337
+          },
+          {
+            "epoch": 6,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
+            "epoch": 7,
+            "val_balanced_accuracy": 0.3333333333333333
+          },
+          {
             "epoch": 8,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.419047619047619
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.3619047619047619
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 12,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.619047619047619
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.5238095238095238
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.47619047619047616
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_009_gated_fusion.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_009_early_concat.pt"
     },
     {
       "trial_id": 10,
-      "proposal_reason": "Gated fusion is strongest so far; repeat with a second seed to assess seed sensitivity.",
+      "proposal_reason": "Early concatenation is strongest so far; test whether moderate compression preserves complementary features.",
       "config": {
-        "strategy": "gated_fusion",
+        "strategy": "early_concat",
         "l2_norm": true,
-        "projection_dim": 384,
-        "hidden_dim": 768,
-        "dropout": 0.5,
+        "projection_dim": 256,
+        "hidden_dim": 384,
+        "dropout": 0.4,
         "learning_rate": 0.0001,
         "weight_decay": 0.0001,
         "epochs": 20,
         "batch_size": 16,
-        "seed": 44
+        "seed": 43
       },
-      "val_balanced_accuracy": 0.5714285714285714,
-      "previous_best_balanced_accuracy": 0.619047619047619,
+      "val_balanced_accuracy": 0.5238095238095238,
+      "previous_best_balanced_accuracy": 0.5714285714285714,
       "is_new_best": false,
       "is_material_gain": false,
       "details": {
-        "best_val_balanced_accuracy": 0.5714285714285714,
+        "best_val_balanced_accuracy": 0.5238095238095238,
         "history": [
           {
             "epoch": 1,
-            "val_balanced_accuracy": 0.4095238095238095
+            "val_balanced_accuracy": 0.27619047619047615
           },
           {
             "epoch": 2,
-            "val_balanced_accuracy": 0.14285714285714285
+            "val_balanced_accuracy": 0.35238095238095235
           },
           {
             "epoch": 3,
-            "val_balanced_accuracy": 0.2285714285714286
+            "val_balanced_accuracy": 0.4095238095238095
           },
           {
             "epoch": 4,
-            "val_balanced_accuracy": 0.38095238095238093
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 5,
-            "val_balanced_accuracy": 0.2857142857142857
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 6,
-            "val_balanced_accuracy": 0.44761904761904764
+            "val_balanced_accuracy": 0.4476190476190475
           },
           {
             "epoch": 7,
-            "val_balanced_accuracy": 0.37142857142857144
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 8,
-            "val_balanced_accuracy": 0.42857142857142855
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 9,
-            "val_balanced_accuracy": 0.4952380952380952
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 10,
-            "val_balanced_accuracy": 0.5142857142857143
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 11,
-            "val_balanced_accuracy": 0.4952380952380952
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 12,
@@ -740,39 +828,39 @@
           },
           {
             "epoch": 13,
-            "val_balanced_accuracy": 0.4952380952380952
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 14,
-            "val_balanced_accuracy": 0.5714285714285714
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 15,
-            "val_balanced_accuracy": 0.5714285714285714
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 16,
-            "val_balanced_accuracy": 0.5428571428571428
+            "val_balanced_accuracy": 0.47619047619047616
           },
           {
             "epoch": 17,
-            "val_balanced_accuracy": 0.5714285714285714
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 18,
-            "val_balanced_accuracy": 0.5428571428571428
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 19,
-            "val_balanced_accuracy": 0.4952380952380952
+            "val_balanced_accuracy": 0.5238095238095238
           },
           {
             "epoch": 20,
-            "val_balanced_accuracy": 0.5428571428571428
+            "val_balanced_accuracy": 0.5238095238095238
           }
         ]
       },
-      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_010_gated_fusion.pt"
+      "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent\\fusion_agent\\Fold_0\\checkpoints\\trial_010_early_concat.pt"
     }
   ]
 }

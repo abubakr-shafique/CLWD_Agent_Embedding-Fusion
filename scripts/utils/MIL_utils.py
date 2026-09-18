@@ -255,7 +255,7 @@ def train_loop(model, data_loader_Train, data_loader_Val,
             Val_loss_check = val_loss
             early_stopping = 0
 
-        if current_lr > 1e-5:
+        if current_lr > 1e-6:
             scheduler.step()
 
         if early_stopping >= tolerance and early_stop:
@@ -346,7 +346,8 @@ def generate_slide_embeddings(model, data_loader, output_dir):
             logits = results_dict["logits"].float().cpu().detach()
             attention = log_dict["attention"].float().cpu().detach()
             attention = attention.squeeze()
-            embeddings = log_dict["slide_feats"].float().cpu().detach()           
+            embeddings = log_dict["slide_feats"].float().cpu().detach()    
+            embeddings = embeddings.squeeze()
 
             data_loop.set_description(f"Epoch [{epoch}/{1}]")
 

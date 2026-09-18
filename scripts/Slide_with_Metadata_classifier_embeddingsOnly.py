@@ -14,7 +14,7 @@ from sklearn.utils.class_weight import compute_class_weight
 import torchvision
 
 import project_dirs as pdir
-import config.MIL_config as MIL_config
+import config.slide_metadata_config as slide_metadata_config
 import utils.MIL_utils as MIL_utils
 import MIL_model.abmil as get_MIL
 import utils.metadata_utils as metadata_utils
@@ -34,22 +34,22 @@ def set_seed(seed):
 
 parser = argparse.ArgumentParser(description='CLWD MIL Slide With Metadata Classifier.')
 parser.add_argument('--embedding_dir', type=str, default=pdir.EMBEDDINGS_DIR)
-parser.add_argument('--train_csv', type=str, default=MIL_config.train_csv)
-parser.add_argument('--val_csv', type=str, default=MIL_config.val_csv)
-parser.add_argument('--test_csv', type=str, default=MIL_config.test_csv)
+parser.add_argument('--train_csv', type=str, default=slide_metadata_config.train_csv)
+parser.add_argument('--val_csv', type=str, default=slide_metadata_config.val_csv)
+parser.add_argument('--test_csv', type=str, default=slide_metadata_config.test_csv)
 parser.add_argument('--output_dir', type=str, default=pdir.EVAL_DIR)
 parser.add_argument('--result_dir', type=str, default=pdir.RESULT_DIR)
 parser.add_argument('--model_name', type=str, default="H-OPTIMUS-1", choices=['H-OPTIMUS-1', 'UNI2-h', 'Virchow2'])
 parser.add_argument('--mode', type=str, default="train", choices=['train', 'eval'])
-parser.add_argument('--MIL_model', type=str, default=MIL_config.MIL_Model, choices=['ABMIL'])
+parser.add_argument('--MIL_model', type=str, default=slide_metadata_config.MIL_Model, choices=['ABMIL'])
 parser.add_argument('--metadata_model', type=str, default='AgeSex_Linear', choices=['AgeSex_Linear'])
 parser.add_argument('--pretrained', type=str, default="yes", choices=['yes', 'no'])
 parser.add_argument('--freeze_models', type=str, default="yes", choices=['yes', 'no'])
-parser.add_argument('--batch_size', type=int, default=1)
+parser.add_argument('--batch_size', type=int, default=16)
 parser.add_argument('--fold', type=int, default=0)
 parser.add_argument('--seed', type=int, default=8, help="Random seed for reproducible experiment (default: 8)")
-parser.add_argument('--target_mag', type=int, default=MIL_config.target_magnification)
-parser.add_argument('--target_patch_size', type=int, default=MIL_config.target_patch_size)
+parser.add_argument('--target_mag', type=int, default=slide_metadata_config.target_magnification)
+parser.add_argument('--target_patch_size', type=int, default=slide_metadata_config.target_patch_size)
 
 args = parser.parse_args()
 
@@ -83,15 +83,13 @@ if __name__ == '__main__':
     sex_to_index = {label: idx for idx, label in enumerate(sex_names)}
     index_to_sex = {idx: label for idx, label in enumerate(sex_names)}
 
-    # train_Labels_idx = MIL_utils.labels_to_indices(train_Labels, label_to_index)
-    # val_Labels_idx = MIL_utils.labels_to_indices(val_Labels, label_to_index)
-    # test_Labels_idx = MIL_utils.labels_to_indices(test_Labels, label_to_index)
 
-    embedding_root_folder = os.path.join(args.embedding_dir, "patch", f"{args.model_name}_{args.target_patch_size}_{args.target_mag}x")
+    embedding_root_folder = os.path.join(args.embedding_dir, "slide", f"{args.model_name}_{args.target_patch_size}_{args.target_mag}x", f"Fold_{args.fold}")
+    metadata_embedding_root_folder = os.path.join(args.embedding_dir, "metadata_SexAge", f"{args.metadata_model}", f"Fold_{args.fold}")
 
-    train_dataset = slide_metadata_utils.Slide_Clinical_Dataset(train_csv_Data, label_to_index, sex_to_index, embedding_root=embedding_root_folder)
-    val_dataset = slide_metadata_utils.Slide_Clinical_Dataset(val_csv_Data, label_to_index, sex_to_index, embedding_root=embedding_root_folder)
-    test_dataset = slide_metadata_utils.Slide_Clinical_Dataset(test_csv_Data, label_to_index, sex_to_index, embedding_root=embedding_root_folder)
+    train_dataset = slide_metadata_utils.Slide_Clinical_Dataset_Embeddings(train_csv_Data, label_to_index, sex_to_index, embedding_root_slide=embedding_root_folder, embedding_root_metadata=metadata_embedding_root_folder)
+    val_dataset = slide_metadata_utils.Slide_Clinical_Dataset_Embeddings(val_csv_Data, label_to_index, sex_to_index, embedding_root_slide=embedding_root_folder, embedding_root_metadata=metadata_embedding_root_folder)
+    test_dataset = slide_metadata_utils.Slide_Clinical_Dataset_Embeddings(test_csv_Data, label_to_index, sex_to_index, embedding_root_slide=embedding_root_folder, embedding_root_metadata=metadata_embedding_root_folder)
 
     train_dataloader = DataLoader(train_dataset, batch_size=args.batch_size, shuffle=True, drop_last=False)
     val_dataloader = DataLoader(val_dataset, batch_size=args.batch_size, shuffle=True, drop_last=False)
@@ -103,75 +101,30 @@ if __name__ == '__main__':
     if logg:
         print(f"Class weights: {class_weights}")
 
-    if args.model_name == "Virchow2":
-        input_dim = 1280
-    elif args.model_name == "UNI2-h" or args.model_name == "H-OPTIMUS-1":
-        input_dim = 1536
-    else:
-        input_dim = 1536
+    
 
-    MetaData_model = slide_metadata_utils.AgeSexClassifier(num_classes=n_classes) ## Custom Linear CLassifier
-
-    if logg:
-        print(f"MetaData Model\n")
-        print(MetaData_model)
-        print("\n\n")
-
-    MIL_model = get_MIL.ABMIL(in_dim=input_dim, num_classes=n_classes,
-                            embed_dim=MIL_config.embed_dim,
-                            num_fc_layers = MIL_config.num_fc_layers,
-                            dropout = MIL_config.dropout,
-                            attn_dim = MIL_config.attn_dim,
-                            gate = MIL_config.attn_dim)
-    if logg:
-        print(f"MIL Model\n")
-        print(MIL_model)
-        print("\n\n")
-
-    if args.pretrained == "yes" and args.mode == "train":
-        print("Loading pretrained MIL and Metadata model weights.")
-        metadata_checkpoint_load_dir = os.path.join(args.output_dir, "Clinical_metadata_classifier", f"{args.metadata_model}", f"Fold_{args.fold}", f"{args.metadata_model}_Classifier.pth")
-        metadata_state_dict = torch.load(metadata_checkpoint_load_dir)
-        # Load the state dictionary into the model
-        MetaData_model.load_state_dict(metadata_state_dict, strict=True)
-
-        slide_checkpoint_load_dir = os.path.join(args.output_dir, "MIL_checkpoints", f"{args.model_name}_{MIL_config.MIL_Model}_{args.seed}", f"{args.model_name}", f"Fold_{args.fold}", f"{args.model_name}_Classifier.pth")
-        slide_state_dict = torch.load(slide_checkpoint_load_dir)
-        # Load the state dictionary into the model
-        MIL_model.load_state_dict(slide_state_dict, strict=True)
-
-    if args.freeze_models == "yes":
-        print("Frozen MIL and UnFrozen metadata models.")
-        ## UnFreeze metadata model
-        for param in MetaData_model.parameters():
-            param.requires_grad = True
-
-        ## Freeze MIL model
-        for param in MIL_model.parameters():
-            param.requires_grad = False
-
-    Slide_MetaData_Combined_model = slide_metadata_utils.Slide_MetaData_Classifier(slide_model=MIL_model, metadata_model=MetaData_model)
+    Slide_MetaData_Combined_model = slide_metadata_utils.Slide_MetaData_Classifier_Embeddings()
 
     if logg:
             print(f"Slide MetaData Combined Model\n")
             print(Slide_MetaData_Combined_model)
             print("\n\n")
 
-    checkpoint_save_dir = os.path.join(args.output_dir, "Slide_MetaData_checkpoints", f"{args.model_name}_{MIL_config.MIL_Model}_{args.metadata_model}")
+    checkpoint_save_dir = os.path.join(args.output_dir, "Slide_MetaData_checkpoints", f"{args.model_name}_{slide_metadata_config.MIL_Model}_{args.metadata_model}")
     os.makedirs(checkpoint_save_dir, exist_ok=True)
 
     if args.mode == "train":
-        print(f"Training {MIL_config.MIL_Model} and {args.metadata_model} combined")
+        print(f"Training {slide_metadata_config.MIL_Model} and {args.metadata_model} combined")
         ##train the MIL model
         slide_metadata_utils.train_loop(model=Slide_MetaData_Combined_model, data_loader_Train=train_dataloader,
                                         model_name=f"{args.MIL_model}_{args.metadata_model}",
-                                        data_loader_Val=val_dataloader, cls_weights=class_weights, input_dim=input_dim,
+                                        data_loader_Val=val_dataloader, cls_weights=class_weights, input_dim=1024,
                                         output_dir=checkpoint_save_dir, Fold=f"Fold_{args.fold}")
 
     else:
-        print(f"Evaluating {MIL_config.MIL_Model} and {args.metadata_model} combined")
+        print(f"Evaluating {slide_metadata_config.MIL_Model} and {args.metadata_model} combined")
         ### Evaluate
-        results_save_dir = os.path.join(args.result_dir, "Slide_MetaData_results", f"{args.model_name}_{MIL_config.MIL_Model}_{args.metadata_model}")
+        results_save_dir = os.path.join(args.result_dir, "Slide_MetaData_results", f"{args.model_name}_{slide_metadata_config.MIL_Model}_{args.metadata_model}")
         os.makedirs(results_save_dir, exist_ok=True)
 
         try:

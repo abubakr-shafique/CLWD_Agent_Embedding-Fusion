@@ -32,11 +32,12 @@ class Slide_Clinical_Dataset(Dataset):
 
         # ----------------------------------------------------
         # Age normalization
-        # Age is explicitly normalized from 0-100 to 0-1
+        # Age is explicitly normalized from 0-1
         # ----------------------------------------------------
         age = self.df["Age"].astype(float).values
-        age = np.clip(age, 0, 100)
-        age = age / 100.0
+        min_age = 24.0#np.min(age)
+        max_age = 80.0#np.max(age)
+        age = [(ag - min_age) / (max_age - min_age) for ag in age]
 
         # ----------------------------------------------------
         # Sex encoding
@@ -75,29 +76,91 @@ class Slide_Clinical_Dataset(Dataset):
 
         return Age_sex, embedding, label
 
+class Slide_Clinical_Dataset_Embeddings(Dataset):
+
+    def __init__(self, df, label_to_index, sex_to_index, embedding_root_slide, embedding_root_metadata, file_ext=".pt", device='cpu'):
+
+        self.df = df.reset_index(drop=True)
+        self.embedding_root = embedding_root_slide
+        self.embedding_root_metadata = embedding_root_metadata
+        self.file_ext = file_ext
+        self.device = device
+
+        # ----------------------------------------------------
+        # Age normalization
+        # Age is explicitly normalized from 0-1
+        # ----------------------------------------------------
+        age = self.df["Age"].astype(float).values
+        min_age = 24.0#np.min(age)
+        max_age = 80.0#np.max(age)
+        age = [(ag - min_age) / (max_age - min_age) for ag in age]
+
+        # ----------------------------------------------------
+        # Sex encoding
+        # Female = 0
+        # Male   = 1
+        # ----------------------------------------------------
+        sex = self.df["Sex"].map(sex_to_index).values
+
+        self.WSI_ID = self.df["WSI_ID"].astype(str).values
+
+        # Features: [normalized_age, sex]
+        self.X = np.column_stack([
+            age,
+            sex
+        ]).astype(np.float32)
+
+        self.y = (
+            self.df["Benchmark_Label_7class"]
+            .map(label_to_index)
+            .values
+            .astype(np.int64)
+        )
+
+    def __len__(self):
+        return len(self.X)
+
+    def __getitem__(self, idx):
+
+        Age_sex_path = os.path.join(self.embedding_root, f"{self.WSI_ID[idx]}{self.file_ext}")
+        Age_sex = torch.load(Age_sex_path, map_location=self.device) ## for pt file
+
+        embedding_path = os.path.join(self.embedding_root_metadata, f"{self.WSI_ID[idx]}{self.file_ext}")
+        embedding = torch.load(embedding_path, map_location=self.device) ## for pt file
+
+        label = torch.tensor(self.y[idx], dtype=torch.long)
+
+        
+
+        return Age_sex, embedding, label
+
 class AgeSexClassifier(nn.Module):
-    def __init__(self, layers=[64, 128, 384], num_classes=7):
+    def __init__(self, input = 2, layers = [64, 128, 384], dropout=0.2, num_classes=7):
         super().__init__()
 
         self.network = nn.Sequential(
-            nn.Linear(2, layers[0]),
+            nn.Linear(input, layers[0]),
             nn.ReLU(),
             nn.LayerNorm(layers[0]),
 
             nn.Linear(layers[0], layers[1]),
             nn.ReLU(),
-            nn.Dropout(0.2),
+            nn.Dropout(dropout),
 
             nn.Linear(layers[1], layers[2]),
         )
+        self.reconstruct = nn.Linear(layers[2], input)
         self.classifier = nn.Linear(layers[2], num_classes)
 
     def forward(self, x):
 
         Embeds = self.network(x)
+        age_Sex = self.reconstruct(Embeds)
         logits = self.classifier(Embeds)
 
-        return logits, Embeds
+
+        return logits, Embeds, age_Sex
+
 
 class Slide_MetaData_Classifier(nn.Module):
     def __init__(self, slide_model=None, metadata_model=None, slide_embed = 1024, meta_embed = 384, num_classes=7, dropout=0.2):
@@ -115,17 +178,43 @@ class Slide_MetaData_Classifier(nn.Module):
             nn.Dropout(dropout),
 
             nn.Linear(slide_embed, slide_embed),
-        )
+            )
         self.classifier = nn.Linear(slide_embed, num_classes)
 
     def forward(self, AgeSex, Embeddings):
 
-        meta_logits, meta_Embeds = self.metadata_model(AgeSex)
+        meta_logits, meta_Embeds, age_sex = self.metadata_model(AgeSex)
 
         results_dict, log_dict = self.slide_model(Embeddings, return_attention=True, return_slide_feats=True)
         slide_Embeds = log_dict["slide_feats"]
 
         combined_embedding = torch.cat((meta_Embeds, slide_Embeds), dim=1)
+
+        Embeds= self.network(combined_embedding)
+        logits = self.classifier(Embeds)
+
+        return logits, Embeds
+
+class Slide_MetaData_Classifier_Embeddings(nn.Module):
+    def __init__(self, slide_embed = 1024, meta_embed = 384, num_classes=7, dropout=0.4):
+        super().__init__()
+
+        self.network = nn.Sequential(
+            nn.Linear((slide_embed+meta_embed), slide_embed),
+            nn.ReLU(),
+            nn.LayerNorm(slide_embed),
+
+            nn.Linear(slide_embed, meta_embed),
+            nn.ReLU(),
+            nn.Dropout(dropout),
+
+            nn.Linear(meta_embed, meta_embed),
+            )
+        self.classifier = nn.Linear(meta_embed, num_classes)
+
+    def forward(self, AgeSex, Embeddings):
+
+        combined_embedding = torch.cat((Embeddings, AgeSex), dim=1)
 
         Embeds= self.network(combined_embedding)
         logits = self.classifier(Embeds)
@@ -296,12 +385,15 @@ def train_loop(model, data_loader_Train, data_loader_Val,
 
             torch.save(model.state_dict(), os.path.join(checkpoint_save_dir, f"{model_name}_Classifier.pth"))
             print("Model Saved")
-            Val_acc_check = val_bal_acc
             file = open(Log_file_path, "a")
             file.write("Model Saved \n")
             file.close()
-            Val_loss_check = val_loss
             early_stopping = 0
+            # if val_bal_acc > Val_acc_check:
+            Val_acc_check = val_bal_acc
+            # if val_loss < Val_loss_check:
+            Val_loss_check = val_loss
+            print(f"Best Accuracy: {Val_acc_check}, Best Loss: {Val_loss_check}")
 
         if current_lr > 1e-6:
             scheduler.step()

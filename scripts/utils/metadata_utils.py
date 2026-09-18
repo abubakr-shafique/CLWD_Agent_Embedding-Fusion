@@ -33,8 +33,9 @@ class ClinicalDataset(Dataset):
         # Age is explicitly normalized from 0-100 to 0-1
         # ----------------------------------------------------
         age = self.df["Age"].astype(float).values
-        age = np.clip(age, 0, 100)
-        age = age / 100.0
+        min_age = 24.0#np.min(age)
+        max_age = 80.0#np.max(age)
+        age = [(ag - min_age) / (max_age - min_age) for ag in age]
 
         # ----------------------------------------------------
         # Sex encoding
@@ -76,28 +77,31 @@ class ClinicalDataset(Dataset):
         return x
 
 class AgeSexClassifier(nn.Module):
-    def __init__(self, num_classes=7):
+    def __init__(self, input = 2, layers = [64, 128, 384], dropout=0.3, num_classes=7):
         super().__init__()
 
         self.network = nn.Sequential(
-            nn.Linear(2, 64),
+            nn.Linear(input, layers[0]),
             nn.ReLU(),
-            nn.LayerNorm(64),
+            nn.LayerNorm(layers[0]),
 
-            nn.Linear(64, 128),
+            nn.Linear(layers[0], layers[1]),
             nn.ReLU(),
-            nn.Dropout(0.2),
+            nn.Dropout(dropout),
 
-            nn.Linear(128, 384),
+            nn.Linear(layers[1], layers[2]),
         )
-        self.classifier = nn.Linear(384, num_classes)
+        self.reconstruct = nn.Linear(layers[2], input)
+        self.classifier = nn.Linear(layers[2], num_classes)
 
     def forward(self, x):
 
         Embeds = self.network(x)
+        age_Sex = self.reconstruct(Embeds)
         logits = self.classifier(Embeds)
 
-        return logits, Embeds
+
+        return logits, Embeds, age_Sex
 
 
 def CrossEntropy_Accuracy(outputs, labels):
@@ -110,11 +114,130 @@ def CrossEntropy_Accuracy(outputs, labels):
     
     return accuracy
 
+def train_loop_representation_learning(model, data_loader_Train, data_loader_Val,
+               epochs=Meta_config.epochs, lr=Meta_config.lr, 
+               wd=Meta_config.wd, model_name= Meta_config.model_name,
+               early_stop=Meta_config.early_Stop, tolerance=Meta_config.tolerance,
+               output_dir=None, Fold=0, lr_step_count=Meta_config.lr_step_count,
+               ):
+    
+    early_stopping = 0
+    model = model.to(device)
+
+    optimizer = torch.optim.AdamW(model.parameters(), lr=lr, weight_decay=wd)
+    criterion = nn.MSELoss()
+    Loss_func = "MSE Loss"
+
+    scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=lr_step_count, gamma=0.1)
+    
+    checkpoint_save_dir = os.path.join(output_dir, model_name, f"Fold_{Fold}")
+    os.makedirs(checkpoint_save_dir, exist_ok=True)
+    Log_file_path = os.path.join(checkpoint_save_dir, f"{model_name} Representation Learning.txt")
+
+    file = open(Log_file_path, "a")
+    my_log = (f"Epochs: {epochs}, Model_Name: {model_name}, Optimizer: AdamW,\n"
+              f"Loss_Func: {Loss_func},\n"
+              f"Learning Rate: {lr}, Weight_Decay: {wd}. \n"
+              f"Batch_Size: {Meta_config.batch_size}, Early_Stop {early_stop},\n"
+                )
+    file.write(my_log)
+    file.close()
+
+    training_history = {
+        "epoch": [],
+        "Train_Loss": [],
+        "Val_Loss": []
+        }
+    
+    Val_loss_check = np.inf
+    for epoch in range(0, epochs):
+        data_loop = tqdm(data_loader_Train)
+
+        training_history["epoch"].append(epoch)
+
+        Avg_loss = []
+
+        for idx, (inputs, labels) in enumerate(data_loop):
+            inputs = inputs.to(device)
+
+            # Zero the parameter gradients
+            optimizer.zero_grad()
+
+            logits, Embeds, age_Sex = model(inputs)            
+            outputs = age_Sex
+
+            loss = criterion(outputs, inputs)
+
+            Avg_loss.append(loss.item())
+            
+            # Backward pass and optimization
+            loss.backward()
+            optimizer.step()
+
+            current_lr = optimizer.param_groups[0]["lr"]
+            
+            data_loop.set_description(f"Epoch [{epoch}/{epochs}]")
+            data_loop.set_postfix(Loss = loss.item(), Lr = current_lr)
+
+        train_loss = np.round(np.mean(Avg_loss), 3)
+        print('Avg Train Loss: {:.2f}'.format(train_loss))
+        training_history["Train_Loss"].append(train_loss)
+
+        file = open(Log_file_path, "a")
+        my_log = f"Epoch: {epoch}, Avg_Train_Loss: {train_loss} \n" 
+        file.write(my_log)
+        file.close()
+
+
+        Avg_loss_val = []
+        
+        for inputs, labels in data_loader_Val:
+            inputs = inputs.to(device)
+
+            
+            logits, Embeds, age_Sex = model(inputs)            
+            outputs = age_Sex
+
+            loss_val = criterion(outputs, inputs)
+            
+            Avg_loss_val.append(loss_val.item())
+    
+        val_loss = np.round(np.mean(Avg_loss_val), 3)
+        print('Avg Val Loss: {:.2f}'.format(val_loss))
+        training_history["Val_Loss"].append(val_loss)
+        
+        file = open(Log_file_path, "a")
+        my_log = f"Epoch: {epoch}, Avg_Val_Loss: {val_loss}\n" 
+        file.write(my_log)
+        file.close()
+
+        early_stopping = early_stopping + 1
+
+        if val_loss < Val_loss_check: ## Best Loss
+
+            torch.save(model.state_dict(), os.path.join(checkpoint_save_dir, f"{model_name}_Representation.pth"))
+            print("Model Saved")
+            file = open(Log_file_path, "a")
+            file.write("Model Saved \n")
+            file.close()
+            Val_loss_check = val_loss
+            early_stopping = 0
+
+        if current_lr > 1e-6:
+            scheduler.step()
+
+        if early_stopping >= tolerance and early_stop:
+            break
+    
+    training_history_save_path = os.path.join(checkpoint_save_dir, f"{model_name}_training_history_representation_learning.npy")
+    np.save(training_history_save_path, training_history)
+
+
 def train_loop(model, data_loader_Train, data_loader_Val,
                epochs=Meta_config.epochs, lr=Meta_config.lr, 
                wd=Meta_config.wd, model_name= Meta_config.model_name,
                loss_func=Meta_config.loss, cls_weights=None, early_stop=Meta_config.early_Stop, tolerance=Meta_config.tolerance,
-               output_dir=None, Fold=f"Fold_{Meta_config.fold}", lr_step_count=Meta_config.lr_step_count,
+               output_dir=None, Fold=0, lr_step_count=Meta_config.lr_step_count,
                ):
     
     early_stopping = 0
@@ -131,16 +254,16 @@ def train_loop(model, data_loader_Train, data_loader_Val,
 
     scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=lr_step_count, gamma=0.1)
     
-    checkpoint_save_dir = os.path.join(output_dir, model_name, f"{Fold}")
+    checkpoint_save_dir = os.path.join(output_dir, model_name, f"Fold_{Fold}")
     os.makedirs(checkpoint_save_dir, exist_ok=True)
-    Log_file_path = os.path.join(checkpoint_save_dir, f"{model_name} Training MIL.txt")
+    Log_file_path = os.path.join(checkpoint_save_dir, f"{model_name} Training Metadata MLP.txt")
 
     file = open(Log_file_path, "a")
     my_log = (f"Epochs: {epochs}, Model_Name: {model_name}, Optimizer: AdamW,\n"
               f"Loss_Func: {Loss_func},\n"
               f"Learning Rate: {lr}, Weight_Decay: {wd}. \n"
               f"Batch_Size: {Meta_config.batch_size}, Early_Stop {early_stop},\n"
-                )
+            )
     file.write(my_log)
     file.close()
 
@@ -173,7 +296,7 @@ def train_loop(model, data_loader_Train, data_loader_Val,
             # Zero the parameter gradients
             optimizer.zero_grad()
 
-            logits, Embeds = model(inputs)            
+            logits, Embeds, age_Sex = model(inputs)            
             outputs = logits
 
             predicted_labels = torch.argmax(outputs, dim=1).cpu()
@@ -223,7 +346,7 @@ def train_loop(model, data_loader_Train, data_loader_Val,
                 val_Label.append(L)
             labels = labels.to(device)
             
-            logits, Embeds = model(inputs)            
+            logits, Embeds, age_Sex = model(inputs)            
             outputs = logits
 
             predicted_labels = torch.argmax(outputs, dim=1).cpu()
@@ -267,7 +390,7 @@ def train_loop(model, data_loader_Train, data_loader_Val,
             Val_loss_check = val_loss
             early_stopping = 0
 
-        if current_lr > 1e-7:
+        if current_lr > 1e-6:
             scheduler.step()
 
         if early_stopping >= tolerance and early_stop:
@@ -278,8 +401,8 @@ def train_loop(model, data_loader_Train, data_loader_Val,
     plot_save_path = os.path.join(checkpoint_save_dir, f"{model_name}_training_curves.png")
     eval_utils.Plot_Training_Data(train_accuracy=training_history["Train_Accuracy"], val_accuracy=training_history["Val_Accuracy"], train_loss=training_history["Train_Loss"], val_loss=training_history["Val_Loss"], save_path=plot_save_path)
 
-def eval_loop(model, data_loader_Test, Class_idx_to_Label, Class_Label_to_idx, results_dir=None, model_name=Meta_config.model_name, Fold=f"Fold_{Meta_config.fold}", n_classes=None, label_names=None):
-    result_save_dir = os.path.join(results_dir, model_name, f"{Fold}")
+def eval_loop(model, data_loader_Test, Class_idx_to_Label, Class_Label_to_idx, results_dir=None, model_name=Meta_config.model_name, Fold=0, n_classes=None, label_names=None):
+    result_save_dir = os.path.join(results_dir, model_name, f"Fold_{Fold}")
     os.makedirs(result_save_dir, exist_ok=True)
 
     model = model.to(device)
@@ -300,7 +423,7 @@ def eval_loop(model, data_loader_Test, Class_idx_to_Label, Class_Label_to_idx, r
             inputs = inputs.to(device)
             labels = labels.to(device)
 
-            logits, Embeds = model(inputs)            
+            logits, Embeds, age_Sex = model(inputs)            
             outputs = logits
 
             predicted_labels = torch.argmax(outputs, dim=1)
@@ -348,7 +471,7 @@ def generate_metadata_embeddings(model, metadata_loader, output_dir):
         for idx, (inputs, labels, WSI_IDs) in enumerate(data_loop):
             inputs = inputs.to(device)
 
-            logits, Embeds = model(inputs)            
+            logits, Embeds, age_Sex = model(inputs)            
 
             Embeds = Embeds.float().cpu().detach()
             for i, E in enumerate(Embeds):

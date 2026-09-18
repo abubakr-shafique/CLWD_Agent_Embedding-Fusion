@@ -58,7 +58,7 @@ def main() -> None:
         "uni2": 1024,
         "virchow2": 1024,
         "optimus": 1024,
-        "meta": 2,
+        "meta": 384,
     }, f"Unexpected input dimensions: {dims}"
 
     agent_output_dir = os.path.join(args.output_dir, "fusion_agent", f"Fold_{args.fold}")

@@ -1,32 +1,32 @@
 {
   "n_test_samples": 43,
-  "balanced_accuracy": 0.4897959183673469,
-  "macro_auroc_ovr": 0.8863374652848337,
+  "balanced_accuracy": 0.6232993197278912,
+  "macro_auroc_ovr": 0.8747377424179726,
   "per_class_auroc_ovr": {
-    "Acinar": 0.9404761904761906,
-    "Cribriform": 0.9333333333333332,
-    "In situ": 1.0,
-    "Lepidic": 0.7894736842105263,
-    "Micropapillary": 0.9157894736842105,
-    "Papillary": 0.6928571428571428,
-    "Solid": 0.9324324324324323
+    "Acinar": 0.9206349206349207,
+    "Cribriform": 0.925,
+    "In situ": 0.9901960784313726,
+    "Lepidic": 0.7421052631578948,
+    "Micropapillary": 0.8789473684210527,
+    "Papillary": 0.7428571428571428,
+    "Solid": 0.9234234234234235
   },
   "confusion_matrix": [
     [
-      3,
+      4,
       0,
       0,
       2,
       0,
       1,
-      1
+      0
     ],
     [
       0,
-      1,
-      0,
-      0,
       2,
+      0,
+      0,
+      1,
       0,
       0
     ],
@@ -40,12 +40,12 @@
       0
     ],
     [
-      1,
-      0,
-      1,
-      1,
-      0,
       2,
+      0,
+      1,
+      1,
+      0,
+      1,
       0
     ],
     [
@@ -60,23 +60,23 @@
     [
       0,
       0,
-      2,
-      0,
       1,
-      4,
-      1
-    ],
-    [
-      0,
-      0,
-      0,
+      1,
       0,
       5,
-      0,
       1
+    ],
+    [
+      0,
+      2,
+      0,
+      0,
+      1,
+      0,
+      3
     ]
   ],
-  "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Embedding-Fusion\\src\\agent",
-  "strategy": "gated_fusion",
-  "validation_balanced_accuracy": 0.619047619047619
+  "checkpoint_path": "E:\\CLWD_LungAdenoCarcinoma\\CLWD_Agent_Embedding-Fusion\\src\\agent",
+  "strategy": "early_concat",
+  "validation_balanced_accuracy": 0.5714285714285714
 }

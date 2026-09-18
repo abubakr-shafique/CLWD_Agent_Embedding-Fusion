@@ -18,12 +18,13 @@ if str(parent_dir) not in sys.path:
 
 class Slide_Clinical_Dataset(Dataset):
 
-    def __init__(self, df, label_to_index, sex_to_index, embedding_root_FM1, embedding_root_FM2, embedding_root_FM3, file_ext=".pt", device='cpu'):
+    def __init__(self, df, label_to_index, sex_to_index, embedding_root_FM1, embedding_root_FM2, embedding_root_FM3, embedding_root_metadata, file_ext=".pt", device='cpu'):
 
         self.df = df.reset_index(drop=True)
         self.embedding_root_FM1 = embedding_root_FM1
         self.embedding_root_FM2 = embedding_root_FM2
         self.embedding_root_FM3 = embedding_root_FM3
+        self.embedding_root_metadata = embedding_root_metadata
         self.file_ext = file_ext
         self.device = device
 
@@ -71,7 +72,9 @@ class Slide_Clinical_Dataset(Dataset):
         FM3_embedding_path = os.path.join(self.embedding_root_FM3, f"{self.WSI_ID[idx]}{self.file_ext}")
         FM3_embedding = torch.load(FM3_embedding_path, map_location=self.device) ## for pt file
 
-        Age_sex = torch.tensor(self.X[idx], dtype=torch.float32)
+        # Age_sex = torch.tensor(self.X[idx], dtype=torch.float32)
+        metadata_embedding_path = os.path.join(self.embedding_root_metadata, f"{self.WSI_ID[idx]}{self.file_ext}")
+        Age_sex = torch.load(metadata_embedding_path, map_location=self.device) ## for pt file
 
         label = torch.tensor(self.y[idx], dtype=torch.long)
 

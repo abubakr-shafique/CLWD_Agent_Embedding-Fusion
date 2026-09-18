@@ -1,7 +1,8 @@
 import os, sys
 
 
-script_path = "scripts/Slide_with_Metadata_classifier.py"
+# script_path = "scripts/Slide_with_Metadata_classifier.py"
+script_path = "scripts/Slide_with_Metadata_classifier_embeddingsOnly.py"
 Models = ["H-OPTIMUS-1"]
 Folds = [0, 1, 2]
 
