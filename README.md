@@ -338,7 +338,7 @@ python scripts/evaluate_best_agent_model.py --fold 0
 
 This workflow separates embedding generation, data preparation, fusion-strategy optimization, and final model evaluation.
 
-or all the folds can run altogether using [`run_all_agens.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_agens.py) script on Windows with the following command:
+or all the folds can run altogether using [`run_all_agents.py`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/run_all_agens.py) script on Windows with the following command:
 
 ```bash
 python run_all_agents.py
