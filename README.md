@@ -630,15 +630,14 @@ The results across three folds are summarized using [`notebooks/summarize_result
 Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
 
 **Best Model:**
-Among all experimental configurations evaluated, H-OPTIMUS-1 with ABMIL-based slide-level aggregation achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 66.77% and an AUROC of 90.70%, representing the highest performance observed across the evaluated approaches.
-| Overall Report | Confusion Matrix |
-| :---: | :---: |
-| <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_Overall_Accuracy.jpg" width="100%"> | <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_CM.jpg" width="50%"> |
+Among all experimental configurations evaluated, agentic Fusion model achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 68.70% and an AUROC of 92.50%, representing the highest performance observed across the evaluated approaches.
+
+Confusion Matrix
+<img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/Embedding_Fusion/Fold_2/BestFusion_test_results_CM.jpg" width="100%">
 
 
-| ROC Curves | Sensitivity & Specificity |
-| :---: | :---: |
-| <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_ROC.jpg" width="100%"> | <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/MIL_results/H-OPTIMUS-1_ABMIL_8/H-OPTIMUS-1/Fold_2/H-OPTIMUS-1_results_Sensitivity-Specificity.jpg" width="70%"> |
+ROC Curves
+<img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/Embedding_Fusion/Fold_2/BestFusion_test_ROC.jpg" width="100%">
 
 ## Discussion
 Accurate classification of lung adenocarcinoma into its seven histological subtypes remains a challenging task due to the substantial morphological heterogeneity and overlap between tumour patterns. Distinguishing these subtypes often requires recognition of subtle architectural and cytological features, while individual WSIs may contain extensive regions of non-tumour tissue and substantial intra-tumour heterogeneity. Furthermore, the relative abundance of different histological patterns can vary considerably across slides, potentially resulting in an imbalance between diagnostically informative and non-informative regions. These factors make robust slide-level classification particularly challenging and motivate the use of methods capable of selectively identifying and integrating discriminative morphological features across large numbers of tissue patches. <br>
