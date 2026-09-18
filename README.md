@@ -633,10 +633,7 @@ Detailed evaluation results for each cross-validation fold are provided in the [
 Among all experimental configurations evaluated, agentic Fusion model achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 68.70% and an macro-AUROC of 92.50%, representing the highest performance observed across the evaluated approaches.
 
 ```
-"best_trial configuration": {
-    "trial_id": 1,
-    "strategy": "early_concat",
-    "config": {
+"best_configuration": {
       "strategy": "early_concat",
       "l2_norm": false,
       "projection_dim": null,
@@ -647,7 +644,7 @@ Among all experimental configurations evaluated, agentic Fusion model achieved t
       "epochs": 100,
       "batch_size": 16,
       "seed": 42
-    }}
+    }
 ```
 
 **Confusion Matrix**
