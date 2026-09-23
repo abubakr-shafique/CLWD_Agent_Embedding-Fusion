@@ -628,10 +628,10 @@ The results across three folds are summarized using [`notebooks/summarize_result
 | H-OPTIMUS-1_ABMIL + metadata (age + sex)    | **88.06 $\pm$ 3.45 <br> [79.48, 96.64]**    | **62.13 $\pm$ 1.90 <br> [57.39, 66.86]**   |
 | **Fused (agent-selected) + metadata**       | **88.30 $\pm$ 3.17 <br> [80.42, 96.18]**    | **63.43 $\pm$ 4.81 <br> [51.46, 75.39]**   |
 
-Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification.
+Detailed evaluation results for each cross-validation fold are provided in the [`/results`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/results) directory of the project. In addition to the aggregate performance metrics, the results include confusion matrices, per-class ROC curves, detailed classification reports, and class-specific sensitivity and specificity. These results provide a more comprehensive assessment of model performance across the seven tumour subtypes and enable analysis of class-level performance and potential sources of misclassification. Checkpoints and training curves for the non-agentic models are available in the [`/checkpoints`](https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/tree/main/src/eval) directory. 
 
 **Best Model:**
-Among all experimental configurations evaluated, agentic Fusion model achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 68.70% and an macro-AUROC of 92.50%, representing the highest performance observed across the evaluated approaches.
+For non-agentic models, H-OPTIMUS-1 (ABMIL) Fold 2 shows the best performance (balanced accuracy of 66.77\% and macro AUROC of 91.50\%). Among all experimental configurations evaluated, agentic Fusion model achieved the strongest overall performance in fold 2 test set. The model obtained a balanced accuracy of 68.70% and an macro-AUROC of 92.50%, representing the highest performance observed across the evaluated approaches.
 
 ```
 "best_configuration": {
@@ -647,6 +647,8 @@ Among all experimental configurations evaluated, agentic Fusion model achieved t
       "seed": 42
     }
 ```
+**Training Curves**
+<img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/src/agent/fusion_agent/Fold_2/best_trial_curves.png" width="100%">
 
 **Confusion Matrix**
 <img src="https://github.com/abubakr-shafique/CLWD_Agent_Embedding-Fusion/blob/main/results/Embedding_Fusion/Fold_2/BestFusion_test_results_CM.jpg" width="100%">
