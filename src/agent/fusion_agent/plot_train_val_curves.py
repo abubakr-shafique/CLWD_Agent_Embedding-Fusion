@@ -18,9 +18,9 @@ from pathlib import Path
 
 import matplotlib.pyplot as plt
 
-TRIAL_RESULTS_PATH = "trial_results.json"
-DECISION_LOG_PATH = "decision_log.jsonl"
-OUT_PNG = "best_trial_curves.png"
+TRIAL_RESULTS_PATH = "Fold_2\\trial_results.json"
+DECISION_LOG_PATH = "Fold_2\\decision_log.jsonl"
+OUT_PNG = "Fold_2\\best_trial_curves.png"
 
 # Candidate key names for each metric, in priority order.
 ACC_TRAIN_KEYS = ["train_balanced_accuracy", "train_accuracy", "train_acc"]

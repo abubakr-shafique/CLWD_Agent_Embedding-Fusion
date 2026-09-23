@@ -48,6 +48,7 @@ class TrialConfig:
     batch_size: int = 16
     seed: int = 42
 
+criterion = None
 
 class FusionSearchAgent:
     """
@@ -409,6 +410,7 @@ class FusionSearchAgent:
             7 * class_counts.clamp_min(1)
         )
 
+        global criterion
         criterion = torch.nn.CrossEntropyLoss(
             weight=class_weights.to(self.device)
         )
@@ -577,11 +579,12 @@ class FusionSearchAgent:
                 seed=config.seed,
             )
 
-            y_true, y_prob = predict_fusion_model(
+            y_true, y_prob, mean_loss = predict_fusion_model(
                 model=model,
                 data=val_data,
                 batch_size=config.batch_size,
                 device=self.device,
+                criterion=criterion,
             )
 
         elif config.strategy == "gated_fusion":
@@ -606,7 +609,7 @@ class FusionSearchAgent:
                 seed=config.seed,
             )
 
-            y_true, y_prob = predict_fusion_model(
+            y_true, y_prob, mean_loss = predict_fusion_model(
                 model=model,
                 data=val_data,
                 batch_size=config.batch_size,
