@@ -60,12 +60,15 @@ def predict_fusion_model(
     data: dict,
     batch_size: int,
     device: torch.device,
-) -> tuple[np.ndarray, np.ndarray]:
+    criterion: nn.Module | None = None,
+) -> tuple[np.ndarray, np.ndarray, float | None]:
     loader = make_loader(data, batch_size=batch_size, shuffle=False)
 
     model.eval()
     all_labels = []
     all_probabilities = []
+    total_loss = 0.0
+    total_samples = 0
 
     for batch in loader:
         labels = batch.pop("labels").to(device)
@@ -74,13 +77,19 @@ def predict_fusion_model(
         logits = model(batch)
         probabilities = torch.softmax(logits, dim=1)
 
+        if criterion is not None:
+            loss = criterion(logits, labels.long())
+            total_loss += loss.item() * labels.size(0)
+            total_samples += labels.size(0)
+
         all_labels.append(labels.cpu())
         all_probabilities.append(probabilities.cpu())
 
     y_true = torch.cat(all_labels).numpy()
     y_prob = torch.cat(all_probabilities).numpy()
+    mean_loss = total_loss / total_samples if criterion is not None and total_samples > 0 else None
 
-    return y_true, y_prob
+    return y_true, y_prob, mean_loss
 
 
 def train_fusion_model(
@@ -120,10 +129,15 @@ def train_fusion_model(
     for epoch in range(1, epochs + 1):
         model.train()
 
+        train_loss_sum = 0.0
+        train_samples = 0
+        all_train_labels = []
+        all_train_preds = []
+
         for batch in train_loader:
             labels = batch.pop("labels").long().to(device)
             batch = {name: x.float().to(device) for name, x in batch.items()}
-            
+
             optimizer.zero_grad(set_to_none=True)
 
             logits = model(batch)
@@ -133,11 +147,22 @@ def train_fusion_model(
             torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=5.0)
             optimizer.step()
 
-        y_val, prob_val = predict_fusion_model(
+            train_loss_sum += loss.item() * labels.size(0)
+            train_samples += labels.size(0)
+            all_train_labels.append(labels.detach().cpu())
+            all_train_preds.append(logits.detach().argmax(dim=1).cpu())
+
+        train_loss = train_loss_sum / train_samples
+        y_train = torch.cat(all_train_labels).numpy()
+        train_pred = torch.cat(all_train_preds).numpy()
+        train_bal_acc = balanced_accuracy_score(y_train, train_pred)
+
+        y_val, prob_val, val_loss = predict_fusion_model(
             model,
             val_data,
             batch_size,
             device,
+            criterion=criterion,
         )
 
         current_lr = optimizer.param_groups[0]["lr"]
@@ -149,6 +174,9 @@ def train_fusion_model(
 
         history.append({
             "epoch": epoch,
+            "train_loss": float(train_loss),
+            "val_loss": float(val_loss),
+            "train_balanced_accuracy": float(train_bal_acc),
             "val_balanced_accuracy": float(val_bal_acc),
         })
 
@@ -157,10 +185,9 @@ def train_fusion_model(
             best_state = copy.deepcopy(model.state_dict())
             es = 0
 
-        es = es+1
+        es = es + 1
         if es >= tolerance and early_stop:
             break
-
 
     model.load_state_dict(best_state)
 
